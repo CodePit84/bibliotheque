@@ -57,4 +57,40 @@ class CountryController extends AbstractController
             'countryForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/country/edit/{id}', name: 'country.edit')]
+    public function editCountry(Country $country, Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        $form = $this->createForm(CountryFormType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($country);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Pays modifié avec succès');
+
+            // return $this->redirectToRoute('country.index', array('id' => $userId));
+            return $this->redirectToRoute('country.index');
+        }
+        
+        return $this->render('country/editCountry.html.twig', [
+            'countryForm' => $form->createView(),
+            'country' => $country
+        ]);
+    }
+
+    #[Route('/country/delete/{id}', name: 'country.delete')]
+    public function delete(Country $country, EntityManagerInterface $entityManager):Response
+    {
+        $entityManager->remove($country);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Pays supprimé avec succès');
+
+        // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
+        return $this->redirectToRoute('country.index');
+    }
+
+
 }

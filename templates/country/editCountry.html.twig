@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un pays{% endblock %}
+
+{% block body %}
+<section class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h1 class="mb-3">Modification d'un pays</h1>
+
+            {# {{ dump(app) }} #}
+
+            {{ form_start(countryForm) }}
+
+                {# {{ dump(bookForm) }} #}
+
+                {# <fieldset class="mb-3"> #}
+
+                    {{ form_row(countryForm.name) }}
+
+                {# </fieldset> #}
+                <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+            {{ form_end(countryForm) }}        
+        </div>
+    </div>
+</section>
+{% endblock %}

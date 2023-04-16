@@ -6,7 +6,9 @@ use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AuthorFormType extends AbstractType
 {
@@ -19,12 +21,17 @@ class AuthorFormType extends AbstractType
             ->add('firstName', TextType::class, [
                 'label' => 'Prénom',
             ])
-            ->add('dateOfBirth')
+            ->add('dateOfBirth', DateType::class, [
+                'label' => 'Date de naisance',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                // 'format' => 'd/m/Y',
+            ])
             ->add('biography', TextType::class, [
                 'label' => 'Biographie',
             ])
             ->add('nativeCountry')
-            ->add('books')
+            // ->add('books')
         ;
     }
 

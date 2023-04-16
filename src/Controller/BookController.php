@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookController extends AbstractController
 {
-    #[Route('/book', name: 'book')]
+    #[Route('/book', name: 'book.index')]
     public function index(BookRepository $bookRepository): Response
     {
         $books = $bookRepository->findAll();

@@ -56,4 +56,38 @@ class AuthorController extends AbstractController
             'authorForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/author/edit/{id}', name: 'author.edit')]
+    public function editAuthor(Author $author, Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        $form = $this->createForm(AuthorFormType::class, $author);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($author);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Auteur modifié avec succès');
+
+            // return $this->redirectToRoute('country.index', array('id' => $userId));
+            return $this->redirectToRoute('author.index');
+        }
+        
+        return $this->render('author/editAuthor.html.twig', [
+            'authorForm' => $form->createView(),
+            'author' => $author
+        ]);
+    }
+
+    #[Route('/author/delete/{id}', name: 'author.delete')]
+    public function delete(Author $author, EntityManagerInterface $entityManager):Response
+    {
+        $entityManager->remove($author);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Auteur supprimé avec succès');
+
+        // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
+        return $this->redirectToRoute('author.index');
+    }
 }

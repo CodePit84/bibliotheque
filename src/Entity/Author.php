@@ -22,7 +22,8 @@ class Author
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstName = null;
 
-    #[ORM\Column(nullable: true)]
+    // #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -129,5 +130,10 @@ class Author
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->lastName . ' ' . $this->firstName;
     }
 }
