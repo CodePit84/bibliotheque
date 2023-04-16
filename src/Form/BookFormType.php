@@ -31,6 +31,9 @@ class BookFormType extends AbstractType
                     ]
             ],
             )
+            ->add('author', TextType::class, [
+                'label' => 'Auteur',
+            ])
             ->add('releaseDate', DateType::class, [
                 // 'widget' => 'single_text',
                 // this is actually the default format for single_text
@@ -40,6 +43,7 @@ class BookFormType extends AbstractType
                 'label' => 'Résumé',
             ],
             )
+            
         ;
     }
 

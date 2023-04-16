@@ -23,7 +23,7 @@ class Author
     private ?string $firstName = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $dateOfBirth = null;
+    private ?\DateTimeInterface $dateOfBirth = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $biography = null;
@@ -68,12 +68,12 @@ class Author
         return $this;
     }
 
-    public function getDateOfBirth(): ?\DateTimeImmutable
+    public function getDateOfBirth(): ?\DateTimeInterface
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(?\DateTimeImmutable $dateOfBirth): self
+    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 

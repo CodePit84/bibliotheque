@@ -24,19 +24,19 @@ class BookController extends AbstractController
     }
 
     #[Route('/book/addBook/', name: 'book.addBook')]
-    public function addWithdraw(Request $request, EntityManagerInterface $entityManager): Response
+    public function addBook(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $movement = new Book();
+        $book = new Book();
         
-        $form = $this->createForm(BookFormType::class, $movement);
+        $form = $this->createForm(BookFormType::class, $book);
         
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $movement = $form->getData();
+            $book = $form->getData();
 
-            $entityManager->persist($movement);
+            $entityManager->persist($book);
             $entityManager->flush();
 
             $this->addFlash('success', 'Livre ajouté avec succès');

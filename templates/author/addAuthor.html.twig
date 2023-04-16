@@ -1,30 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un livre{% endblock %}
+{% block title %}Ajout d'un auteur{% endblock %}
 
 {% block body %}
 <section class="container">
     <div class="row mt-4">
         <div class="col">
-            <h1>Ajout d'un livre</h1>
+            <h1>Ajout d'un auteur</h1>
 
             {# {{ dump(app) }} #}
 
-            {{ form_start(bookForm) }}
+            {{ form_start(authorForm) }}
 
                 {# {{ dump(bookForm) }} #}
 
                 {# <fieldset class="mb-3"> #}
 
-                    {{ form_row(bookForm.title) }}
-                    {{ form_row(bookForm.author) }}
-                    {{ form_row(bookForm.releaseDate) }}
-                    {{ form_row(bookForm.summary) }}
+                    {{ form_row(authorForm.lastName) }}
+                    {{ form_row(authorForm.firstName) }}
+                    
                     
 
                 {# </fieldset> #}
                 <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
-            {{ form_end(bookForm) }}        
+            {{ form_end(authorForm) }}        
         </div>
     </div>
 </section>
