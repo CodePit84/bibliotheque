@@ -12,17 +12,8 @@
                 <div class="ml-auto p-2">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
-                        Nb de livres total :
-                        {# {% if sum > 0 %}
-                            <span class="badge rounded-pill bg-success mx-2">{{ sum|number_format(2) }} €</span>
-                        {% else %}
-                            <span class="badge rounded-pill bg-danger mx-2">{{ sum|number_format(2) }} €</span>
-                        {% endif %}
+                            Nb de livres total : {{ books.getTotalItemCount }}
                         </div>
-                        <div class="d-flex">
-                        ({{ movements.getTotalItemCount }} mouvements) #}
-                        </div>
-                    </div>
                 </div>
 
                 <a href="{{ path('book.addBook') }}" class="btn btn-outline-primary">Ajouter un livre</a>
@@ -31,7 +22,7 @@
 
                 {# {{ dump(books) }} #}
 
-                <table class="table table-hover">
+                <table class="table table-hover mt-3">
                     <thead class="table-primary">
                         <tr>
                             {# <th>ID</th> #}
@@ -56,12 +47,20 @@
                                 {% endif %} #}
                                 
                                 <td>{{ book.title }}</td>
+                                {# <td>{{ book.author }}</td> #}
+                                <td>{% for author in book.author %}
+                                        {{ author.lastName }} {{ author.firstName }} </br>
+                                    {% endfor %}
+                                </td>
+                                <td>à faire</td>
+                                <td>à faire</td>
+                                <td>à faire</td>
                                 {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
                                 <td>
-                                    {# <a href="{{ path('app_movement_edit', {id: movement.id}) }}" class="btn btn-info btn-sm">Modifier</a> #}
+                                    <a href="{{ path('book.edit', {id: book.id}) }}" class="btn btn-info btn-sm">Modifier</a>
                                 </td>
                                 <td>
-                                    {# <a href="{{ path('app_movement_delete', {id: movement.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer ce mouvement ?')">Supprimer</a> #}
+                                    <a href="{{ path('book.delete', {id: book.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer ce livre ?')">Supprimer</a>
                                 </td>
                             </tr>
                         {% endfor %}

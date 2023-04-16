@@ -32,12 +32,21 @@ class BookFormType extends AbstractType
             ],
             )
             ->add('author')
-            ->add('releaseDate')
-            // , DateType::class, [
-                // 'widget' => 'single_text',
-                // this is actually the default format for single_text
-                // 'format' => 'yyyy-MM-dd',
+            // ->add('author', CollectionType::class, [
+            //     'entry_type' => AuthorType::class,
+            //     'entry_options' => ['label' => false],
+            //     'allow_add' => true,
             // ])
+            // ->add('releaseDate')
+            ->add('releaseDate', DateType::class, [
+                'label' => 'Date de sortie',
+                'label_attr' => [
+                    'class' => 'mt-4'  
+                ],
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                // 'format' => 'd/m/Y',
+            ])
             ->add('summary', textType::class, [
                 'label' => 'Résumé',
             ],
