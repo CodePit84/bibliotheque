@@ -21,7 +21,7 @@ class Book
     private ?string $title = null;
 
     // #[ORM\Column(nullable: true)]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $releaseDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

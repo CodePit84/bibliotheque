@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Author;
+use App\Entity\Book;
 use App\Entity\Country;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -27,6 +28,8 @@ class AppFixtures extends Fixture
         }
 
         // Les Auteurs
+        $authors= [];
+
         for ($i=1; $i <=25 ; $i++) { 
             $author = new Author();
             $author->setlastName($faker->lastName());
@@ -36,8 +39,21 @@ class AppFixtures extends Fixture
             $author->setBiography($faker->text($maxNbChars = 500));
             $author->setNativeCountry($countries[mt_rand(0, 24)]);
 
+            $authors[] = $author;
+
             $manager->persist($author);
         }
+
+        // Les Livres
+
+        for ($i=1; $i <=25 ; $i++) { 
+            $book = new Book();
+            $book->setTitle($faker->sentence($nbWords = 4, $variableNbWords = true));
+            $book->addAuthor($authors[mt_rand(0, 24)]);
+
+            $manager->persist($book);
+        }
+
 
         // Ajout d'un Pays d'origine à Author
             // for ($k=0; $k < count($author); $k++) {
