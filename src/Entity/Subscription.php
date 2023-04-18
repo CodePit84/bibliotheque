@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\SubscriptionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SubscriptionRepository;
 
 #[ORM\Entity(repositoryClass: SubscriptionRepository::class)]
 class Subscription
@@ -14,19 +15,22 @@ class Subscription
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $subscriberNumber = null;
+    private ?int $subscriptionNumber = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $subscriptionDate = null;
+    // #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $subscriptionDate = null;
 
     #[ORM\Column]
     private ?float $subscriptionAmount = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $subscriptionStartDate = null;
+    // #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $subscriptionStartDate = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $subscriptionEndDate = null;
+    // #[ORM\Column]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $subscriptionEndDate = null;
 
     #[ORM\OneToOne(mappedBy: 'number', cascade: ['persist', 'remove'])]
     private ?RegisteredUser $registeredUser = null;
@@ -36,24 +40,24 @@ class Subscription
         return $this->id;
     }
 
-    public function getSubscriberNumber(): ?int
+    public function getSubscriptionNumber(): ?int
     {
-        return $this->subscriberNumber;
+        return $this->subscriptionNumber;
     }
 
-    public function setSubscriberNumber(int $subscriberNumber): self
+    public function setSubscriptionNumber(int $subscriptionNumber): self
     {
-        $this->subscriberNumber = $subscriberNumber;
+        $this->subscriptionNumber = $subscriptionNumber;
 
         return $this;
     }
 
-    public function getSubscriptionDate(): ?\DateTimeImmutable
+    public function getSubscriptionDate(): ?\DateTimeInterface
     {
         return $this->subscriptionDate;
     }
 
-    public function setSubscriptionDate(\DateTimeImmutable $subscriptionDate): self
+    public function setSubscriptionDate(\DateTimeInterface $subscriptionDate): self
     {
         $this->subscriptionDate = $subscriptionDate;
 
@@ -72,24 +76,24 @@ class Subscription
         return $this;
     }
 
-    public function getSubscriptionStartDate(): ?\DateTimeImmutable
+    public function getSubscriptionStartDate(): ?\DateTimeInterface
     {
         return $this->subscriptionStartDate;
     }
 
-    public function setSubscriptionStartDate(\DateTimeImmutable $subscriptionStartDate): self
+    public function setSubscriptionStartDate(\DateTimeInterface $subscriptionStartDate): self
     {
         $this->subscriptionStartDate = $subscriptionStartDate;
 
         return $this;
     }
 
-    public function getSubscriptionEndDate(): ?\DateTimeImmutable
+    public function getSubscriptionEndDate(): ?\DateTimeInterface
     {
         return $this->subscriptionEndDate;
     }
 
-    public function setSubscriptionEndDate(\DateTimeImmutable $subscriptionEndDate): self
+    public function setSubscriptionEndDate(\DateTimeInterface $subscriptionEndDate): self
     {
         $this->subscriptionEndDate = $subscriptionEndDate;
 
@@ -111,5 +115,9 @@ class Subscription
         $this->registeredUser = $registeredUser;
 
         return $this;
+    }
+
+    public function __toString(){
+        return $this->id;
     }
 }

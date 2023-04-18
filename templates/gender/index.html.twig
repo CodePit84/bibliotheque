@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tous les abonnés{% endblock %}
+{% block title %}Tous les genres{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -8,16 +8,16 @@
             {# <main class="col-9 border border-light bg-white p-2"> #}
             <main class="border border-light bg-white p-2">
                 {# getTotalItemCount propre à knp_paginator #}
-                <h3>Liste des abonnés</h3> 
+                {# <h3>Mouvements de {{ app.user.nickname }}</h3>  #}
                 <div class="ml-auto p-2">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
-                        Nb d'abonnés total : {{ registeredUsers.getTotalItemCount }}
+                        Nb de genres total : {{ genders.getTotalItemCount }}
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <a href="{{ path('registeredUser.addRegisteredUser') }}" class="btn btn-outline-primary">Ajouter un abonné</a>
+                    <a href="{{ path('gender.addGender') }}" class="btn btn-outline-primary">Ajouter un genre</a>
                 </div>
                     {# {{ dump(app.user) }} #}
 
@@ -27,15 +27,13 @@
                     <thead class="table-primary">
                         <tr>
                             {# <th>ID</th> #}
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Numéro d'abonnement</th>
+                            <th>Nom du genre</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for registeredUser in registeredUsers %}
+                        {% for gender in genders %}
 
                             <tr class="table-info">
                                 {# {% if movement.movement<0 %}
@@ -45,22 +43,20 @@
                                 
                                 {% endif %} #}
                                 
-                                <td>{{ registeredUser.lastName }}</td>
-                                <td>{{ registeredUser.firstName }}</td>
-                                
+                                <td>{{ gender.name }}</td>
                                 {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
                                 <td>
-                                    <a href="{{ path('registeredUser.edit', {id: registeredUser.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                    <a href="{{ path('gender.edit', {id: gender.id}) }}" class="btn btn-info btn-sm">Modifier</a>
                                 </td>
                                 <td>
-                                    <a href="{{ path('registeredUser.delete', {id: registeredUser.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet abonné ?')">Supprimer</a>
+                                    <a href="{{ path('gender.delete', {id: gender.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer ce genre ?')">Supprimer</a>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 <div class="navigation d-flex justify-content-center">
-                    {{ knp_pagination_render(registeredUsers) }}
+                    {{ knp_pagination_render(genders) }}
                 </div>
             </main>
         </div>

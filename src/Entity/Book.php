@@ -30,6 +30,9 @@ class Book
     #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
     private Collection $author;
 
+    #[ORM\Column(length: 20)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
@@ -96,6 +99,18 @@ class Book
     public function removeAuthor(Author $author): self
     {
         $this->author->removeElement($author);
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

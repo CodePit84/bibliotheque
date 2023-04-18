@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un genre{% endblock %}
+
+{% block body %}
+<section class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h1>Modification d'un genre</h1>
+
+            {# {{ dump(app) }} #}
+
+            {{ form_start(genderForm) }}
+
+                {# {{ dump(bookForm) }} #}
+
+                {# <fieldset class="mb-3"> #}
+
+                    {{ form_row(genderForm.name) }}
+
+                {# </fieldset> #}
+                <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+            {{ form_end(genderForm) }}        
+        </div>
+    </div>
+</section>
+{% endblock %}

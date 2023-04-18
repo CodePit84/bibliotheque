@@ -6,7 +6,9 @@ use App\Entity\RegisteredUser;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class RegisteredUserFormType extends AbstractType
 {
@@ -34,7 +36,20 @@ class RegisteredUserFormType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'E-mail',
             ])
-            ->add('number')
+            ->add('amount', MoneyType::class)
+            // ->add('subscriptionStartDate')
+            ->add('subscriptionStartDate', DateType::class, [
+                'label' => 'Date de début d\'abonnement',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+            // ->add('subscriptionEndDate')
+            // ->add('subscriptionEndDate', DateType::class, [
+            //     'label' => 'Date de naisance',
+            //     'widget' => 'single_text',
+            //     'format' => 'yyyy-MM-dd',
+            //     // 'format' => 'd/m/Y',
+            // ])
         ;
     }
 

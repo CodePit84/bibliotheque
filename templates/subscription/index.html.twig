@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tous les abonnés{% endblock %}
+{% block title %}Tous les abonnements{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -8,16 +8,16 @@
             {# <main class="col-9 border border-light bg-white p-2"> #}
             <main class="border border-light bg-white p-2">
                 {# getTotalItemCount propre à knp_paginator #}
-                <h3>Liste des abonnés</h3> 
+                <h3>Liste des abonnements</h3> 
                 <div class="ml-auto p-2">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
-                        Nb d'abonnés total : {{ registeredUsers.getTotalItemCount }}
+                        Nb d'abonnement total : {{ subscriptions.getTotalItemCount }}
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <a href="{{ path('registeredUser.addRegisteredUser') }}" class="btn btn-outline-primary">Ajouter un abonné</a>
+                    <a href="{{ path('subscription.addsubscription') }}" class="btn btn-outline-primary">Ajouter un abonnement</a>
                 </div>
                     {# {{ dump(app.user) }} #}
 
@@ -27,15 +27,17 @@
                     <thead class="table-primary">
                         <tr>
                             {# <th>ID</th> #}
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Numéro d'abonnement</th>
+                            <th>Numéro</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Date début</th>
+                            <th>Date fin</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for registeredUser in registeredUsers %}
+                        {% for subscription in subscriptions %}
 
                             <tr class="table-info">
                                 {# {% if movement.movement<0 %}
@@ -45,22 +47,20 @@
                                 
                                 {% endif %} #}
                                 
-                                <td>{{ registeredUser.lastName }}</td>
-                                <td>{{ registeredUser.firstName }}</td>
-                                
-                                {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
+                                <td>{{ subscription.subscriptionNumber }}</td>
+                                <td>{{ subscription.subscriptionDate.format('d/m/Y') }}</td>
                                 <td>
-                                    <a href="{{ path('registeredUser.edit', {id: registeredUser.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                    <a href="{{ path('subscription.edit', {id: subscription.id}) }}" class="btn btn-info btn-sm">Modifier</a>
                                 </td>
                                 <td>
-                                    <a href="{{ path('registeredUser.delete', {id: registeredUser.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet abonné ?')">Supprimer</a>
+                                    <a href="{{ path('subscription.delete', {id: subscription.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet abonné ?')">Supprimer</a>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
                 <div class="navigation d-flex justify-content-center">
-                    {{ knp_pagination_render(registeredUsers) }}
+                    {{ knp_pagination_render(subscriptions) }}
                 </div>
             </main>
         </div>

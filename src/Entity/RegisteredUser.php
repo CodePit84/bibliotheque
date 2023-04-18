@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegisteredUserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RegisteredUserRepository::class)]
@@ -34,9 +35,14 @@ class RegisteredUser
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\OneToOne(inversedBy: 'registeredUser', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Subscription $number = null;
+    #[ORM\Column]
+    private ?float $amount = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $subscriptionStartDate = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $subscriptionEndDate = null;
 
     public function getId(): ?int
     {
@@ -127,14 +133,38 @@ class RegisteredUser
         return $this;
     }
 
-    public function getNumber(): ?Subscription
+    public function getAmount(): ?float
     {
-        return $this->number;
+        return $this->amount;
     }
 
-    public function setNumber(Subscription $number): self
+    public function setAmount(float $amount): self
     {
-        $this->number = $number;
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getSubscriptionStartDate(): ?\DateTimeInterface
+    {
+        return $this->subscriptionStartDate;
+    }
+
+    public function setSubscriptionStartDate(\DateTimeInterface $subscriptionStartDate): self
+    {
+        $this->subscriptionStartDate = $subscriptionStartDate;
+
+        return $this;
+    }
+
+    public function getSubscriptionEndDate(): ?\DateTimeInterface
+    {
+        return $this->subscriptionEndDate;
+    }
+
+    public function setSubscriptionEndDate(\DateTimeInterface $subscriptionEndDate): self
+    {
+        $this->subscriptionEndDate = $subscriptionEndDate;
 
         return $this;
     }
