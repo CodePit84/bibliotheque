@@ -50,9 +50,11 @@ class RegisteredUserController extends AbstractController
             $subscriptionStartDate = $form->getData()->getSubscriptionStartDate();
             $subscriptionEndDate = clone $subscriptionStartDate;
             $subscriptionEndDate = $subscriptionEndDate->add(new DateInterval('P1Y'));
+
+            $registeredUser->setSubscriptionEndDate($subscriptionEndDate);
             
-            dump($subscriptionEndDate);
-            dd($registeredUser);
+            // dump($subscriptionEndDate);
+            // dd($registeredUser);
 
             $entityManager->persist($registeredUser);
             $entityManager->flush();
