@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RegisteredUserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +45,14 @@ class RegisteredUser
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $subscriptionEndDate = null;
+
+    #[ORM\OneToMany(mappedBy: 'registeredUser', targetEntity: Borrow::class)]
+    private Collection $borrows;
+
+    public function __construct()
+    {
+        $this->borrows = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,5 +177,40 @@ class RegisteredUser
         $this->subscriptionEndDate = $subscriptionEndDate;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Borrow>
+     */
+    public function getBorrows(): Collection
+    {
+        return $this->borrows;
+    }
+
+    public function addBorrow(Borrow $borrow): self
+    {
+        if (!$this->borrows->contains($borrow)) {
+            $this->borrows->add($borrow);
+            $borrow->setRegisteredUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrow(Borrow $borrow): self
+    {
+        if ($this->borrows->removeElement($borrow)) {
+            // set the owning side to null (unless already changed)
+            if ($borrow->getRegisteredUser() === $this) {
+                $borrow->setRegisteredUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->lastName . ' ' . $this->firstName;
     }
 }

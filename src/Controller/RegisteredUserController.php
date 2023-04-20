@@ -73,10 +73,18 @@ class RegisteredUserController extends AbstractController
     #[Route('/registeredUser/edit/{id}', name: 'registeredUser.edit')]
     public function editregisteredUser(RegisteredUser $registeredUser, Request $request, EntityManagerInterface $entityManager): Response
     {   
-        $form = $this->createForm(AuthorFormType::class, $registeredUser);
+        $form = $this->createForm(RegisteredUserFormType::class, $registeredUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // On clone la date de début pour créer la date de fin + 1 AN
+            $subscriptionStartDate = $form->getData()->getSubscriptionStartDate();
+            $subscriptionEndDate = clone $subscriptionStartDate;
+            $subscriptionEndDate = $subscriptionEndDate->add(new DateInterval('P1Y'));
+
+            $registeredUser->setSubscriptionEndDate($subscriptionEndDate);
+
             $entityManager->persist($registeredUser);
             $entityManager->flush();
 
@@ -86,7 +94,7 @@ class RegisteredUserController extends AbstractController
             return $this->redirectToRoute('registeredUser.index');
         }
         
-        return $this->render('registeredUser/editRegisteredUser.html.twig', [
+        return $this->render('registered_user/editRegisteredUser.html.twig', [
             'registeredUserForm' => $form->createView(),
             'registeredUser' => $registeredUser
         ]);

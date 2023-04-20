@@ -33,9 +33,13 @@ class Book
     #[ORM\Column(length: 20)]
     private ?string $type = null;
 
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Copy::class)]
+    private Collection $copies;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->copies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,5 +117,40 @@ class Book
         $this->type = $type;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Copy>
+     */
+    public function getCopies(): Collection
+    {
+        return $this->copies;
+    }
+
+    public function addCopy(Copy $copy): self
+    {
+        if (!$this->copies->contains($copy)) {
+            $this->copies->add($copy);
+            $copy->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCopy(Copy $copy): self
+    {
+        if ($this->copies->removeElement($copy)) {
+            // set the owning side to null (unless already changed)
+            if ($copy->getBook() === $this) {
+                $copy->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }
