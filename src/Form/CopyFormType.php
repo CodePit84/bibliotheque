@@ -14,6 +14,7 @@ class CopyFormType extends AbstractType
         $builder
             ->add('reference')
             ->add('book')
+            ->add('numberOfCopies')
         ;
     }
 

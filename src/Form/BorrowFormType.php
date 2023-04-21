@@ -6,6 +6,8 @@ use App\Entity\Borrow;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class BorrowFormType extends AbstractType
 {
@@ -14,6 +16,11 @@ class BorrowFormType extends AbstractType
         $builder
             ->add('borrowingPeriod')
             ->add('borrowingDate')
+            // ->add('borrowingDate', DateType::class, [
+            //     'label' => 'Date de l\'emprunt',
+            //     'widget' => 'single_text',
+            //     'format' => 'yyyy-MM-dd',
+            // ])
             ->add('registeredUser')
             ->add('copy')
         ;

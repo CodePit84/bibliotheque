@@ -25,6 +25,9 @@ class Copy
     #[ORM\Column(length: 10)]
     private ?string $reference = null;
 
+    #[ORM\Column]
+    private ?int $numberOfCopies = null;
+
     public function __construct()
     {
         $this->borrows = new ArrayCollection();
@@ -92,5 +95,17 @@ class Copy
     public function __toString(): string
     {
         return $this->reference;
+    }
+
+    public function getNumberOfCopies(): ?int
+    {
+        return $this->numberOfCopies;
+    }
+
+    public function setNumberOfCopies(int $numberOfCopies): self
+    {
+        $this->numberOfCopies = $numberOfCopies;
+
+        return $this;
     }
 }

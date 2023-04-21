@@ -45,16 +45,23 @@
                                     <td class="text-success"><strong>+{{ movement.movement|number_format(2) }}<strong></td>
                                 
                                 {% endif %} #}
-                                
+                                {# {{ dump(book) }} #}
                                 <td>{{ book.title }}</td>
                                 {# <td>{{ book.author }}</td> #}
+                                {# <td>{{ dump(book.author) }}</td> #}
                                 <td>{% for author in book.author %}
+                                        {# {{ dump(author) }} #}
                                         {{ author.lastName }} {{ author.firstName }} </br>
                                     {% endfor %}
                                 </td>
                                 <td>à faire</td>
                                 <td>à faire</td>
-                                <td>à faire</td>
+                                {# <td>{{ dump(book.copies) }}</td> #}
+                                <td>{% for copie in book.copies %}
+                                        {# {{ dump(copie) }} #}
+                                        {{ copie.reference }} </br>
+                                    {% endfor %}
+                                </td>
                                 {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
                                 <td>
                                     <a href="{{ path('book.edit', {id: book.id}) }}" class="btn btn-info btn-sm">Modifier</a>
