@@ -30,7 +30,7 @@
                             <th>Auteur</th>
                             <th>Nb ex. total</th>
                             <th>Nb ex. restant</th>
-                            <th>Code </br> emplacement</th>
+                            <th>Ref. </br> exemplaire</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -54,13 +54,19 @@
                                         {{ author.lastName }} {{ author.firstName }} </br>
                                     {% endfor %}
                                 </td>
-                                <td>à faire</td>
+                                <td>{% for copie in book.copies %}
+                                        {{ copie.numberOfCopies }} </br>
+                                    {% endfor %}
+                                </td>
                                 <td>à faire</td>
                                 {# <td>{{ dump(book.copies) }}</td> #}
                                 <td>{% for copie in book.copies %}
                                         {# {{ dump(copie) }} #}
-                                        {{ copie.reference }} </br>
+                                        {# {{ copie.reference }} </br> #}
+                                        {# <a href="{{ path('copyOne.index', {id: copie.id}) }}" class="btn btn-warning btn-sm">{{ copie.reference }}</a></br>    #}
+                                        <a href="{{ path('copyOne.index', {id: copie.id}) }}">{{ copie.reference }}</a></br>   
                                     {% endfor %}
+                                    <a href="{{ path('copy.addCopyFromBook', {id: book.id}) }}" class="btn btn-success btn-sm">Ajouter un exemplaire</a>
                                 </td>
                                 {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
                                 <td>
