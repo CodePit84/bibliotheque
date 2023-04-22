@@ -33,8 +33,9 @@
                             <th>Date d'emprunt</th>
                             <th>Abonné</th>
                             <th>Exemplaire</th>
-                            <th>Modifier</th>
-                            <th>Supprimer</th>
+                            <th>Statut</th>
+                            <th>Retour</th>
+                            {# <th>Supprimer</th> #}
                         </tr>
                     </thead>
                     <tbody>
@@ -47,19 +48,25 @@
                                     <td class="text-success"><strong>+{{ movement.movement|number_format(2) }}<strong></td>
                                 
                                 {% endif %} #}
-                                
+                                {# {{ dump(borrow) }} #}
                                 <td>{{ borrow.id }}</td>
                                 <td>{{ borrow.borrowingDate|date("d/m/Y") }}</td>
                                 <td>{{ borrow.registeredUser }}</td>
                                 <td>{{ borrow.copy }}</td>
+                                <td>{{ borrow.returned }}</td>
                                 {# <td>{{ copy.book }}</td> #}
                                 {# <td>{{ copy.borrows }}</td> #}
                                 <td>
-                                    <a href="{{ path('borrow.edit', {id: borrow.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                    {# <a href="{{ path('borrow.edit', {id: borrow.id}) }}" class="btn btn-info btn-sm">Modifier</a> #}
+                                    {% if borrow.returned %}
+                                        {{ borrow.borrowingEndDate|date("d/m/Y") }}
+                                    {% else %}
+                                        <a href="{{ path('borrow.return', {id: borrow.id}) }}" class="btn btn-info btn-sm" onclick="return confirm('Voulez-vous réellement confirmé le retour ?')">Enregister le retour</a>
+                                    {% endif %}
                                 </td>
-                                <td>
+                                {# <td>
                                     <a href="{{ path('borrow.delete', {id: borrow.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet emprunt ?')">Supprimer</a>
-                                </td>
+                                </td> #}
                             </tr>
                         {% endfor %}
                     </tbody>

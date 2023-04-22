@@ -28,6 +28,12 @@ class Borrow
     #[ORM\JoinColumn(nullable: false)]
     private ?Copy $copy = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $borrowingEndDate = null;
+
+    #[ORM\Column]
+    private ?bool $returned = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +83,30 @@ class Borrow
     public function setCopy(?Copy $copy): self
     {
         $this->copy = $copy;
+
+        return $this;
+    }
+
+    public function getBorrowingEndDate(): ?\DateTimeInterface
+    {
+        return $this->borrowingEndDate;
+    }
+
+    public function setBorrowingEndDate(?\DateTimeInterface $borrowingEndDate): self
+    {
+        $this->borrowingEndDate = $borrowingEndDate;
+
+        return $this;
+    }
+
+    public function isReturned(): ?bool
+    {
+        return $this->returned;
+    }
+
+    public function setReturned(bool $returned): self
+    {
+        $this->returned = $returned;
 
         return $this;
     }

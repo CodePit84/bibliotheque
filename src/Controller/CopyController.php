@@ -26,7 +26,7 @@ class CopyController extends AbstractController
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
-
+        
         return $this->render('copy/index.html.twig', [
             'copies' => $copies,
         ]);

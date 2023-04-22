@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Borrow;
 use App\Form\BorrowFormType;
+use App\Form\BorrowEndFormType;
 use App\Repository\BorrowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -43,6 +44,9 @@ class BorrowController extends AbstractController
 
             $borrow = $form->getData();
 
+            // On set le retour à false car nouvel emprunt
+            $borrow->setReturned(false);
+
             $entityManager->persist($borrow);
             $entityManager->flush();
 
@@ -58,7 +62,7 @@ class BorrowController extends AbstractController
     }
 
     #[Route('/borrow/edit/{id}', name: 'borrow.edit')]
-    public function editBook(Borrow $borrow, Request $request, EntityManagerInterface $entityManager): Response
+    public function editBorrow(Borrow $borrow, Request $request, EntityManagerInterface $entityManager): Response
     {   
         $form = $this->createForm(BorrowFormType::class, $borrow);
         $form->handleRequest($request);
@@ -77,6 +81,54 @@ class BorrowController extends AbstractController
             'borrowForm' => $form->createView(),
             'borrow' => $borrow
         ]);
+    }
+
+    // #[Route('/borrow/return/{id}', name: 'borrow.return')]
+    // public function returnBook(Borrow $borrow, Request $request, EntityManagerInterface $entityManager): Response
+    // {   
+    //     $form = $this->createForm(BorrowEndFormType::class, $borrow);
+    //     $form->handleRequest($request);
+
+    //     // dd($form);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+
+    //         // Passer le returned à true
+
+    //         $entityManager->persist($borrow);
+    //         $entityManager->flush();
+
+    //         $this->addFlash('success', 'Retour de l\'emprunt enregistrer avec succès');
+
+    //         // return $this->redirectToRoute('country.index', array('id' => $userId));
+    //         return $this->redirectToRoute('borrow.index');
+    //     }
+        
+    //     return $this->render('borrow/returnBorrow.html.twig', [
+    //         'borrowEndForm' => $form->createView(),
+    //         'borrow' => $borrow
+    //     ]);
+    // }
+
+    #[Route('/borrow/return/{id}', name: 'borrow.return')]
+    public function returnBook(Borrow $borrow, Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        // On enregistre la date de retour d'aujourd'hui et on passer le returned à true
+        // dump($borrow);
+        $today = new \DateTimeImmutable();
+        $borrow->setBorrowingEndDate($today);
+        $borrow->setReturned(true);
+
+        // dd($borrow);
+
+        $entityManager->persist($borrow);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Retour de l\'emprunt enregistrer avec succès');
+
+        // return $this->redirectToRoute('country.index', array('id' => $userId));
+        return $this->redirectToRoute('borrow.index');    
+
     }
 
     #[Route('/borrow/delete/{id}', name: 'borrow.delete')]
