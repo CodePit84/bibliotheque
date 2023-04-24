@@ -32,9 +32,10 @@
                             <th>Référence</th>
                             <th>Nombres </br>d'exemplaires</br>total</th>
                             <th>Nombres </br>d'exemplaires</br>disponible</th>
+                            <th>Ajouter un emprunt</th>
                             <th>Livre</th>
                             <th>Numéro </br>d'emprunt</th>
-                            <th>Retour O/N</th>
+                            <th>Exemplaire Retouré O/N</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -70,6 +71,10 @@
                                 {% endif %}
                                 </td>
 
+                                <td>
+                                <a href="{{ path('borrow.addBorrowFromCopy', {id: copy.id}) }}" class="btn btn-outline-warning btn-sm">Ajouter un emprunt</a>
+                                </td>
+
                                 <td>{{ copy.book }}</td>
                                 {# <td>{{ copy.borrows }}</td> #}
                                 <td>{% for borrow in copy.borrows %}
@@ -89,10 +94,10 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ path('copy.edit', {id: copy.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                    <a href="{{ path('copy.edit', {id: copy.id}) }}" class="btn btn-outline-info btn-sm">Modifier</a>
                                 </td>
                                 <td>
-                                    <a href="{{ path('copy.delete', {id: copy.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet exemplaire ?')">Supprimer</a>
+                                    <a href="{{ path('copy.delete', {id: copy.id}) }}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet exemplaire ?')">Supprimer</a>
                                 </td>
                             </tr>
                         {% endfor %}

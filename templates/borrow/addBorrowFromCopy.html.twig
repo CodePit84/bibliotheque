@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un emprunt{% endblock %}
+
+{% block body %}
+<section class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h1 class="mb-3">Ajout d'un emprunt</h1>
+
+            {# {{ dump(app) }} #}
+
+            {{ form_start(borrowForm) }}
+
+                {# {{ dump(bookForm) }} #}
+
+                {# <fieldset class="mb-3"> #}
+
+                    {{ form_row(borrowForm.borrowingPeriod) }}
+                    {{ form_row(borrowForm.borrowingDate) }}
+                    {# {{ form_row(authorForm.dateOfBirth|date("d/m/Y")) }} #}
+                    {# {{ form_row(authorForm.dateOfBirth) }} #}
+                    {# {{ form_row(authorForm.nativeCountry, { 'label': 'Pays d\'origine' }) }} #}
+                    {{ form_row(borrowForm.registeredUser) }}
+                    {# {{ form_row(borrowForm.copy) }} #}
+                    {# {{ form_row(authorForm.dateOfBirth) }} #}
+                    
+
+                {# </fieldset> #}
+                <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+            {{ form_end(borrowForm) }}        
+        </div>
+    </div>
+</section>
+{% endblock %}

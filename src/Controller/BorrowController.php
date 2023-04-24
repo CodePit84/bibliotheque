@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Copy;
 use App\Entity\Borrow;
 use App\Form\BorrowFormType;
 use App\Form\BorrowEndFormType;
+use App\Form\BorrowFromCopyFormType;
 use App\Repository\BorrowRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -32,7 +34,7 @@ class BorrowController extends AbstractController
     }
 
     #[Route('/borrow/addBorrow/', name: 'borrow.addBorrow')]
-    public function addBook(Request $request, EntityManagerInterface $entityManager): Response
+    public function addBorrow(Request $request, EntityManagerInterface $entityManager): Response
     {
         $borrow = new Borrow();
         
@@ -57,6 +59,39 @@ class BorrowController extends AbstractController
         }
         
         return $this->render('borrow/addBorrow.html.twig', [
+            'borrowForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/borrow/addBorrowFromCopy/{id}', name: 'borrow.addBorrowFromCopy')]
+    public function addBorrowFromCopy(Copy $copy, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $borrow = new Borrow();
+
+        // On set l'exemplaire
+        $borrow->setCopy($copy);
+        
+        $form = $this->createForm(BorrowFromCopyFormType::class, $borrow);
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $borrow = $form->getData();
+
+            // On set le retour à false car nouvel emprunt
+            $borrow->setReturned(false);
+
+            $entityManager->persist($borrow);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Emprunt ajouté avec succès');
+
+            // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
+            return $this->redirectToRoute('borrow.index');
+        }
+        
+        return $this->render('borrow/addBorrowFromCopy.html.twig', [
             'borrowForm' => $form->createView(),
         ]);
     }
