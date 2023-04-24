@@ -58,7 +58,21 @@
                                         {{ copie.numberOfCopies }} </br>
                                     {% endfor %}
                                 </td>
-                                <td>à faire</td>
+                                <td>
+                                {% for copie in book.copies %}
+                                    {% set i = 0 %}
+                                    {% if copie.borrows is empty %}
+                                        {{ copie.numberOfCopies }}</br>
+                                    {% else %}
+                                        {% for borrow in copie.borrows %}
+                                            {% if not borrow.returned %}
+                                                {% set i = i + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ copie.numberOfCopies - i }}</br>
+                                    {% endif %}
+                                {% endfor %}
+                                </td>
                                 {# <td>{{ dump(book.copies) }}</td> #}
                                 <td>{% for copie in book.copies %}
                                         {# {{ dump(copie) }} #}
