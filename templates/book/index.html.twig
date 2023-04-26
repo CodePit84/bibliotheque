@@ -4,19 +4,30 @@
 
 {% block body %}
     <div class="container">
+
+        {# {{ form(form) }} #}
+
         <div class="row">
             {# <main class="col-9 border border-light bg-white p-2"> #}
             <main class="border border-light bg-white p-2">
                 {# getTotalItemCount propre à knp_paginator #}
                 {# <h3>Mouvements de {{ app.user.nickname }}</h3>  #}
                 <div class="ml-auto p-2">
-                    <div class="d-flex justify-content-between">
+                    <div>
+                        Nb de livres total : {{ books.getTotalItemCount }}
+                    </div>
+                    <div>
+                        {{ form_start(form) }}
                         <div class="d-flex">
-                            Nb de livres total : {{ books.getTotalItemCount }}
+                            {{ form_row(form.words) }}
+                            {{ form_row(form.Rechercher) }}
                         </div>
+                        {{ form_end(form) }}
+                        {# {{ form(form) }} #}
+                    </div>
                 </div>
 
-                <a href="{{ path('book.addBook') }}" class="btn btn-outline-primary">Ajouter un livre</a>
+                <a href="{{ path('book.addBook') }}" class="btn btn-outline-primary mx-2">Ajouter un livre</a>
 
                     {# {{ dump(app.user) }} #}
 

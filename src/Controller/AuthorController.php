@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Form\AuthorFormType;
+use App\Form\SearchBookFormType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -25,9 +26,31 @@ class AuthorController extends AbstractController
             10 /*limit per page*/
         );
 
+        // Recherche
+        $form = $this->createForm(SearchBookFormType::class);
+
+        $search = $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            // On recherche les livres correspondants aux mots clés
+            // $books = $bookRepository->search($search->get('words')->getData());
+            $authors = $paginator->paginate(
+                $authorRepository->search($search->get('words')->getData()),
+                $request->query->getInt('page', 1), /*page number*/
+                10 /*limit per page*/
+            );
+        }
+        
+        
+        
         return $this->render('author/index.html.twig', [
             'authors' => $authors,
+            'form' => $form->createView()
         ]);
+
+        // return $this->render('author/index.html.twig', [
+        //     'authors' => $authors,
+        // ]);
     }
 
     #[Route('/author/addAuthor/', name: 'author.add')]

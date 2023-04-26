@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookFormType;
+use App\Form\SearchBookFormType;
+use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -15,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BookController extends AbstractController
 {
     #[Route('/book', name: 'book.index')]
-    public function index(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(BookRepository $bookRepository, AuthorRepository $authorRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $books = $paginator->paginate(
             // $countryRepository->findAll(),
@@ -24,9 +26,27 @@ class BookController extends AbstractController
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
+
+        // Recherche
+        $form = $this->createForm(SearchBookFormType::class);
+
+        $search = $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            // On recherche les livres correspondants aux mots clés
+            // $books = $bookRepository->search($search->get('words')->getData());
+            $books = $paginator->paginate(
+                $bookRepository->search($search->get('words')->getData()),
+                $request->query->getInt('page', 1), /*page number*/
+                10 /*limit per page*/
+            );
+        }
+        
+        
         
         return $this->render('book/index.html.twig', [
             'books' => $books,
+            'form' => $form->createView()
         ]);
     }
 

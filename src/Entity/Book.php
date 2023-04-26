@@ -3,13 +3,23 @@
 namespace App\Entity;
 
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
+#[ORM\Table(name: "book")]
+#[ORM\Index(name: "book", columns: ["title", "summary"], flags: ["fulltext"])]
+// #[ORM\Index(name: "author", columns: ["last_name", "first_name"], flags: ["fulltext"])]
+
+/**
+ * @ORM\Entity(repositoryClass=BookRepository::class)
+ * @ORM\Table(name="book", indexes={@ORM\Index(columns={"title", "summary"}, flags={"fulltext"})})
+ */
+
 class Book
 {
     #[ORM\Id]

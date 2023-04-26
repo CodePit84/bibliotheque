@@ -9,6 +9,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
+#[ORM\Table(name: "author")]
+#[ORM\Index(name: "author", columns: ["last_name", "first_name"], flags: ["fulltext"])]
 class Author
 {
     #[ORM\Id]

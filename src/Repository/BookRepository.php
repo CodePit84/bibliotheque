@@ -39,6 +39,25 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Recherche des livres en fonction du formulaire
+     *
+     * @return void
+     */
+    public function search($words){
+        $query = $this->createQueryBuilder('b');
+        if($words != null){
+            $query->join('b.author', 'a');
+            $query->where('MATCH_AGAINST(b.title, b.summary) AGAINST (:words boolean)>0')
+                ->orWhere('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
+            // $query->where('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
+                ->setParameter('words',  '*' . $words . '*' );
+            // dd($query);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Book[] Returns an array of Book objects
 //     */
