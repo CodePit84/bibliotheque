@@ -12,21 +12,9 @@
 
             {{ form_start(copyForm) }}
 
-                {# {{ dump(bookForm) }} #}
+                {{ form_row(copyForm.reference) }}
+                {{ form_row(copyForm.numberOfCopies) }}
 
-                {# <fieldset class="mb-3"> #}
-
-                    {# {{ form_row(borrowForm.borrowingPeriod) }} #}
-                    {# {{ form_row(borrowForm.borrowingDate) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth|date("d/m/Y")) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth) }} #}
-                    {# {{ form_row(authorForm.nativeCountry, { 'label': 'Pays d\'origine' }) }} #}
-                    {# {{ form_row(borrowForm.registeredUser) }} #}
-                    {# {{ form_row(borrowForm.copy) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth) }} #}
-                    
-
-                {# </fieldset> #}
                 <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
             {{ form_end(copyForm) }}        
         </div>

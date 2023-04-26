@@ -116,7 +116,7 @@ class CopyController extends AbstractController
             return $this->redirectToRoute('copy.index');
         }
         
-        return $this->render('copy/addCopy.html.twig', [
+        return $this->render('copy/addCopyFromBook.html.twig', [
             'copyForm' => $form->createView(),
         ]);
     }
