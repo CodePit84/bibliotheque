@@ -10,14 +10,26 @@
                 {# getTotalItemCount propre à knp_paginator #}
                 <h3>Liste des abonnés</h3> 
                 <div class="ml-auto p-2">
-                    <div class="d-flex justify-content-between">
+                    <div>
+                        Nb d'auteurs total : {{ registeredUsers.getTotalItemCount }}
+                    </div>
+                    <div>
+                        {{ form_start(form) }}
+                        <div class="d-flex">
+                            {{ form_row(form.words) }}
+                            {{ form_row(form.Rechercher) }}
+                        </div>
+                        {{ form_end(form) }}
+                        {# {{ form(form) }} #}
+                    </div>
+                    {# <div class="d-flex justify-content-between">
                         <div class="d-flex">
                         Nb d'abonnés total : {{ registeredUsers.getTotalItemCount }}
                         </div>
-                    </div>
+                    </div> #}
                 </div>
                 <div class="mb-3">
-                    <a href="{{ path('registeredUser.addRegisteredUser') }}" class="btn btn-outline-primary">Ajouter un abonné</a>
+                    <a href="{{ path('registeredUser.addRegisteredUser') }}" class="btn btn-outline-primary mx-2">Ajouter un abonné</a>
                 </div>
                     {# {{ dump(app.user) }} #}
 

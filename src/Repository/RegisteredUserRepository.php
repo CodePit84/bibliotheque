@@ -39,6 +39,21 @@ class RegisteredUserRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Recherche des abonnés en fonction du formulaire
+     *
+     * @return void
+     */
+    public function search($words){
+        $query = $this->createQueryBuilder('a');
+        if($words != null){
+            $query->where('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
+                ->setParameter('words',  '*' . $words . '*' );
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return RegisteredUser[] Returns an array of RegisteredUser objects
 //     */

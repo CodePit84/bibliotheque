@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateInterval;
 use App\Form\AuthorFormType;
 use App\Entity\RegisteredUser;
+use App\Form\SearchBookFormType;
 use App\Form\RegisteredUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,10 +27,32 @@ class RegisteredUserController extends AbstractController
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
+        
+        // Recherche
+        $form = $this->createForm(SearchBookFormType::class);
 
+        $search = $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            // On recherche les livres correspondants aux mots clés
+            // $books = $bookRepository->search($search->get('words')->getData());
+            $registeredUsers = $paginator->paginate(
+                $registeredUserRepository->search($search->get('words')->getData()),
+                $request->query->getInt('page', 1), /*page number*/
+                10 /*limit per page*/
+            );
+        }
+        
+        
+        
         return $this->render('registered_user/index.html.twig', [
             'registeredUsers' => $registeredUsers,
+            'form' => $form->createView()
         ]);
+
+        // return $this->render('registered_user/index.html.twig', [
+        //     'registeredUsers' => $registeredUsers,
+        // ]);
         
     }
 
