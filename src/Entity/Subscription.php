@@ -108,8 +108,8 @@ class Subscription
     public function setRegisteredUser(RegisteredUser $registeredUser): self
     {
         // set the owning side of the relation if necessary
-        if ($registeredUser->getNumber() !== $this) {
-            $registeredUser->setNumber($this);
+        if ($registeredUser->getId() !== $this) {
+            $registeredUser->setId($this);
         }
 
         $this->registeredUser = $registeredUser;

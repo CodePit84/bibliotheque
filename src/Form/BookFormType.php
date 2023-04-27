@@ -4,11 +4,12 @@ namespace App\Form;
 
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookFormType extends AbstractType
 {
@@ -47,7 +48,7 @@ class BookFormType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 // 'format' => 'd/m/Y',
             ])
-            ->add('summary', textType::class, [
+            ->add('summary', TextareaType::class, [
                 'label' => 'Résumé',
             ],
             )
