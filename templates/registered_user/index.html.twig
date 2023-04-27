@@ -43,6 +43,7 @@
                             <th>Prénom</th>
                             <th>Numéro d'abonnement</th>
                             <th>Date de fin d'abonnement</th>
+                            <th>Abonnement valide</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -62,6 +63,12 @@
                                 <td>{{ registeredUser.firstName }}</td>
                                 <td>{{ registeredUser.id }}</td>
                                 <td>{{ registeredUser.subscriptionEndDate|date("d/m/Y") }}</td>
+                                <td>{% if registeredUser.subscriptionEndDate > todaysDate %}
+                                    ok
+                                    {% else %}
+                                    no
+                                    {% endif %} 
+                                </td>
                                 
                                 {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
                                 <td>

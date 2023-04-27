@@ -43,6 +43,7 @@
                             <th>Nb ex.</br>total</th>
                             <th>Nb ex.</br>restant</th>
                             <th>Ref. </br> exemplaire</th>
+                            <th>Ajouter un</br>exemplaire</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
                         </tr>
@@ -93,9 +94,8 @@
                                         {# <a href="{{ path('copyOne.index', {id: copie.id}) }}" class="btn btn-warning btn-sm">{{ copie.reference }}</a></br>    #}
                                         <a href="{{ path('copyOne.index', {id: copie.id}) }}">{{ copie.reference }}</a></br>   
                                     {% endfor %}
-                                    <a href="{{ path('copy.addCopyFromBook', {id: book.id}) }}" class="btn btn-success btn-sm">Ajouter un exemplaire</a>
                                 </td>
-                                {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
+                                <td><a href="{{ path('copy.addCopyFromBook', {id: book.id}) }}" class="btn btn-success btn-sm">+</a></td>
                                 <td>
                                     <a href="{{ path('book.edit', {id: book.id}) }}" class="btn btn-info btn-sm">Modifier</a>
                                 </td>

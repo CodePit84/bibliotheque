@@ -10,16 +10,20 @@ use App\Form\RegisteredUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\RegisteredUserRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Date;
 
 class RegisteredUserController extends AbstractController
 {
     #[Route('/registered/user', name: 'registeredUser.index')]
     public function index(RegisteredUserRepository $registeredUserRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $todaysDate = new DateTime();
+
         $registeredUsers = $paginator->paginate(
             // $countryRepository->findAll(),
             // Pour un ordre alphabétique :
@@ -47,7 +51,8 @@ class RegisteredUserController extends AbstractController
         
         return $this->render('registered_user/index.html.twig', [
             'registeredUsers' => $registeredUsers,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'todaysDate' => $todaysDate
         ]);
 
         // return $this->render('registered_user/index.html.twig', [

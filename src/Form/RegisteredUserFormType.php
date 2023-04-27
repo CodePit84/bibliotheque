@@ -39,19 +39,11 @@ class RegisteredUserFormType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'Montant de la cotisation',
             ])
-            // ->add('subscriptionStartDate')
             ->add('subscriptionStartDate', DateType::class, [
                 'label' => 'Date de début d\'abonnement',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            // ->add('subscriptionEndDate')
-            // ->add('subscriptionEndDate', DateType::class, [
-            //     'label' => 'Date de naisance',
-            //     'widget' => 'single_text',
-            //     'format' => 'yyyy-MM-dd',
-            //     // 'format' => 'd/m/Y',
-            // ])
         ;
     }
 
