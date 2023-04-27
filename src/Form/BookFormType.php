@@ -51,6 +51,7 @@ class BookFormType extends AbstractType
                 'label' => 'Résumé',
             ],
             )
+            ->add('gender')
             // ->add('type', textType::class, [
             //     'label' => 'Type (Classification décimale de Dewey)',
             //     'attr' => array(

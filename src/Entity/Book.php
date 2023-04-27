@@ -40,11 +40,11 @@ class Book
     #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
     private Collection $author;
 
-    #[ORM\Column(length: 20)]
-    private ?string $type = null;
-
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: Copy::class)]
     private Collection $copies;
+
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Gender $gender = null;
 
     public function __construct()
     {
@@ -117,18 +117,6 @@ class Book
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Copy>
      */
@@ -162,5 +150,17 @@ class Book
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
     }
 }

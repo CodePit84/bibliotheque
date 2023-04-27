@@ -15,12 +15,11 @@ class BorrowFormType extends AbstractType
     {
         $builder
             ->add('borrowingPeriod')
-            ->add('borrowingDate')
-            // ->add('borrowingDate', DateType::class, [
-            //     'label' => 'Date de l\'emprunt',
-            //     'widget' => 'single_text',
-            //     'format' => 'yyyy-MM-dd',
-            // ])
+            ->add('borrowingDate', DateType::class, [
+                'label' => 'Date de naisance',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
             ->add('registeredUser')
             ->add('copy')
         ;

@@ -36,7 +36,9 @@ class RegisteredUserFormType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'E-mail',
             ])
-            ->add('amount', MoneyType::class)
+            ->add('amount', MoneyType::class, [
+                'label' => 'Montant de la cotisation',
+            ])
             // ->add('subscriptionStartDate')
             ->add('subscriptionStartDate', DateType::class, [
                 'label' => 'Date de début d\'abonnement',

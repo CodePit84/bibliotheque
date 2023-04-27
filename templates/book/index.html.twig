@@ -39,8 +39,9 @@
                             {# <th>ID</th> #}
                             <th>Nom</th>
                             <th>Auteur</th>
-                            <th>Nb ex. total</th>
-                            <th>Nb ex. restant</th>
+                            <th>Genre</th>
+                            <th>Nb ex.</br>total</th>
+                            <th>Nb ex.</br>restant</th>
                             <th>Ref. </br> exemplaire</th>
                             <th>Modifier</th>
                             <th>Supprimer</th>
@@ -65,6 +66,7 @@
                                         {{ author.lastName }} {{ author.firstName }} </br>
                                     {% endfor %}
                                 </td>
+                                <td>{{ book.gender }}</td>
                                 <td>{% for copie in book.copies %}
                                         {{ copie.numberOfCopies }} </br>
                                     {% endfor %}

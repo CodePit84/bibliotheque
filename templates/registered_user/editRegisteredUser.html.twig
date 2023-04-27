@@ -12,24 +12,15 @@
 
             {{ form_start(registeredUserForm) }}
 
-                {# {{ dump(bookForm) }} #}
-
-                {# <fieldset class="mb-3"> #}
-
-                    {{ form_row(registeredUserForm.lastName) }}
-                    {{ form_row(registeredUserForm.firstName) }}
-                    {{ form_row(registeredUserForm.address) }}
-                    {{ form_row(registeredUserForm.zipcode) }}
-                    {{ form_row(registeredUserForm.city) }}
-                    {{ form_row(registeredUserForm.phone) }}
-                    {{ form_row(registeredUserForm.email) }}
-                    {# {{ form_row(authorForm.dateOfBirth|date("d/m/Y")) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth) }} #}
-                    {# {{ form_row(registeredUserForm.nativeCountry, { 'label': 'Pays d\'origine' }) }} #}
-
-                    
-
-                {# </fieldset> #}
+                {{ form_row(registeredUserForm.lastName) }}
+                {{ form_row(registeredUserForm.firstName) }}
+                {{ form_row(registeredUserForm.address) }}
+                {{ form_row(registeredUserForm.zipcode) }}
+                {{ form_row(registeredUserForm.city) }}
+                {{ form_row(registeredUserForm.phone) }}
+                {{ form_row(registeredUserForm.email) }}
+                {{ form_row(registeredUserForm.amount) }}
+                {{ form_row(registeredUserForm.subscriptionStartDate) }}
                 <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
             {{ form_end(registeredUserForm) }}        
         </div>

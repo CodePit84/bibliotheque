@@ -16,14 +16,9 @@
 
                 {# <fieldset class="mb-3"> #}
 
-                    {{ form_row(borrowForm.borrowingPeriod) }}
-                    {{ form_row(borrowForm.borrowingDate) }}
-                    {# {{ form_row(authorForm.dateOfBirth|date("d/m/Y")) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth) }} #}
-                    {# {{ form_row(authorForm.nativeCountry, { 'label': 'Pays d\'origine' }) }} #}
-                    {{ form_row(borrowForm.registeredUser) }}
-                    {# {{ form_row(borrowForm.copy) }} #}
-                    {# {{ form_row(authorForm.dateOfBirth) }} #}
+                    {{ form_row(borrowForm.borrowingPeriod, { 'label': 'Période d\'emprunt (en jours)' }) }}
+                    {{ form_row(borrowForm.borrowingDate, { 'label': 'Date d\'emprunt' }) }}
+                    {{ form_row(borrowForm.registeredUser, { 'label': 'Abonné' }) }}
                     
 
                 {# </fieldset> #}
