@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Copy;
 use App\Entity\Borrow;
+use App\Entity\RegisteredUser;
 use App\Form\BorrowFormType;
 use App\Form\BorrowEndFormType;
 use App\Form\BorrowFromCopyFormType;
 use App\Repository\BorrowRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +41,7 @@ class BorrowController extends AbstractController
         $borrow = new Borrow();
         
         $form = $this->createForm(BorrowFormType::class, $borrow);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,12 +51,20 @@ class BorrowController extends AbstractController
             // On set le retour à false car nouvel emprunt
             $borrow->setReturned(false);
 
-            $entityManager->persist($borrow);
-            $entityManager->flush();
+            // On vérifie si l'abonnement de l'abonné est valide
+            $todaysDate = new DateTime();
+            $subscriptionEndDateOfRegisteredUserSelected = $borrow->getRegisteredUser()->getsubscriptionEndDate() ;
+            
+            if ($subscriptionEndDateOfRegisteredUserSelected > $todaysDate) {
+            
+                $entityManager->persist($borrow);
+                $entityManager->flush();
 
-            $this->addFlash('success', 'Emprunt ajouté avec succès');
+                $this->addFlash('success', 'Emprunt ajouté avec succès');
+            }
+            
+            $this->addFlash('danger', 'La période de l\'abonnement de l\'abonné est dépassée');
 
-            // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
             return $this->redirectToRoute('borrow.index');
         }
         

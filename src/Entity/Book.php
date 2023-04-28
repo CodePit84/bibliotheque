@@ -13,12 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ORM\Table(name: "book")]
 #[ORM\Index(name: "book", columns: ["title", "summary"], flags: ["fulltext"])]
-// #[ORM\Index(name: "author", columns: ["last_name", "first_name"], flags: ["fulltext"])]
-
-/**
- * @ORM\Entity(repositoryClass=BookRepository::class)
- * @ORM\Table(name="book", indexes={@ORM\Index(columns={"title", "summary"}, flags={"fulltext"})})
- */
 
 class Book
 {
