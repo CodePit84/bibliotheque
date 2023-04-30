@@ -3,13 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Author;
+use App\Repository\AuthorRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BookFormType extends AbstractType
 {
@@ -32,12 +36,15 @@ class BookFormType extends AbstractType
                     ]
             ],
             )
-            ->add('author')
-            // ->add('author', CollectionType::class, [
-            //     'entry_type' => AuthorType::class,
-            //     'entry_options' => ['label' => false],
-            //     'allow_add' => true,
-            // ])
+            // ->add('author')
+            ->add('author', EntityType::class, [
+                'class' => Author::class,
+                'multiple'=>'true',
+            'query_builder' => function (AuthorRepository $r) {
+                return $r->createQueryBuilder('i')
+                    ->orderBy('i.lastName', 'ASC');
+            },
+            ])
             // ->add('releaseDate')
             ->add('releaseDate', DateType::class, [
                 'label' => 'Date de sortie',
