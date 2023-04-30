@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Book;
 use App\Entity\Author;
+use App\Entity\Gender;
 use App\Repository\AuthorRepository;
+use App\Repository\GenderRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -59,14 +61,14 @@ class BookFormType extends AbstractType
                 'label' => 'Résumé',
             ],
             )
-            ->add('gender')
-            // ->add('type', textType::class, [
-            //     'label' => 'Type (Classification décimale de Dewey)',
-            //     'attr' => array(
-            //         'placeholder' => 'Exemple : RP843DAN'
-            //     )
-            // ],
-            // )
+            // ->add('gender')
+            ->add('gender', EntityType::class, [
+                'class' => Gender::class,
+            'query_builder' => function (GenderRepository $rr) {
+                return $rr->createQueryBuilder('g')
+                    ->orderBy('g.name', 'ASC');
+            },
+            ])
 
         ;
     }
