@@ -61,6 +61,32 @@ class RegisteredUserController extends AbstractController
         
     }
 
+    #[Route('/registered/userOne/{id}', name: 'registeredUserOne.index')]
+    public function indexOne(RegisteredUser $registeredUser, RegisteredUserRepository $registeredUserRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $todaysDate = new DateTime();
+
+        $registeredUserId = $registeredUser->getId();
+
+        $registeredUsers = $paginator->paginate(
+            // $countryRepository->findAll(),
+            // Pour un ordre alphabétique :
+            $registeredUserRepository->findBy(['id' => $registeredUserId]),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+           
+        return $this->render('registered_user/view.html.twig', [
+            'registeredUsers' => $registeredUsers,
+            'todaysDate' => $todaysDate
+        ]);
+
+        // return $this->render('registered_user/index.html.twig', [
+        //     'registeredUsers' => $registeredUsers,
+        // ]);
+        
+    }
+
     #[Route('/registeredUser/addRegisteredUser/', name: 'registeredUser.addRegisteredUser')]
     public function addRegisteredUser(Request $request, EntityManagerInterface $entityManager): Response
     {

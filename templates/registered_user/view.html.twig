@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les abonnés{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {# <main class="col-9 border border-light bg-white p-2"> #}
+            <main class="border border-light bg-white p-2">
+                {# getTotalItemCount propre à knp_paginator #}
+                <h3>Coordonnés de l'abonné</h3> 
+                <div class="mb-3">
+                    <a href="{{ path('registeredUser.addRegisteredUser') }}" class="btn btn-outline-primary mx-2">Ajouter un abonné</a>
+                </div>
+                    {# {{ dump(app.user) }} #}
+
+                {# {{ dump(books) }} #}
+
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            {# <th>ID</th> #}
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>N° d'abo</th>
+                            <th>Date de fin d'abo</th>
+                            <th>Abonnement</th>
+                            <th>Adresse</th>
+                            <th>CP</th>
+                            <th>Ville</th>
+                            <th>Téléphone</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registeredUser in registeredUsers %}
+
+                            <tr class="table-info">
+                                {# {% if movement.movement<0 %}
+                                    <td class="text-danger"><strong>{{ movement.movement|number_format(2) }}<strong></td>
+                                {% else %}
+                                    <td class="text-success"><strong>+{{ movement.movement|number_format(2) }}<strong></td>
+                                
+                                {% endif %} #}
+                                
+                                <td>{{ registeredUser.lastName }}</td>
+                                <td>{{ registeredUser.firstName }}</td>
+                                <td>{{ registeredUser.id }}</td>
+                                <td>{{ registeredUser.subscriptionEndDate|date("d/m/Y") }}</td>
+                                <td>{% if registeredUser.subscriptionEndDate > todaysDate %}
+                                    <span class="badge bg-success">Valide</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Expiré</span>
+                                    {% endif %} 
+                                </td>
+                                
+                                <td>{{ registeredUser.address }}</td>
+                                <td>{{ registeredUser.zipcode }}</td>
+                                <td>{{ registeredUser.city }}</td>
+                                <td>{{ registeredUser.phone }}</td>
+                                <td>{{ registeredUser.email }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation d-flex justify-content-center">
+                    {{ knp_pagination_render(registeredUsers) }}
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

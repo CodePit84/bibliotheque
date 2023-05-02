@@ -35,6 +35,24 @@ class BorrowController extends AbstractController
         ]);
     }
 
+    #[Route('/borrowOne/{id}', name: 'borrowOne.index')]
+    public function indexOne(Borrow $borrow, BorrowRepository $borrowRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $borrowId = $borrow->getId();
+
+        $borrows = $paginator->paginate(
+            // $countryRepository->findAll(),
+            // Pour un ordre alphabétique :
+            $borrowRepository->findBy(['id' => $borrowId]),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('borrow/index.html.twig', [
+            'borrows' => $borrows,
+        ]);
+    }
+
     #[Route('/borrow/addBorrow/', name: 'borrow.addBorrow')]
     public function addBorrow(Request $request, EntityManagerInterface $entityManager): Response
     {

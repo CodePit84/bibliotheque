@@ -51,7 +51,8 @@
                                 {# {{ dump(borrow) }} #}
                                 <td>{{ borrow.id }}</td>
                                 <td>{{ borrow.borrowingDate|date("d/m/Y") }}</td>
-                                <td>{{ borrow.registeredUser }}</td>
+                                {# <td>{{ borrow.registeredUser }}</td> #}
+                                <td><a href="{{ path('registeredUserOne.index', {id: borrow.registeredUser.id}) }}">{{ borrow.registeredUser }}</a></td>
                                 <td>{{ borrow.copy }}</td>
                                 <td>
                                 {% if borrow.returned %}

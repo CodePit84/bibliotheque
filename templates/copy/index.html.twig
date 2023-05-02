@@ -80,7 +80,8 @@
                                 <td>{% for borrow in copy.borrows %}
                                         {# {{ dump(borrow) }} #}
                                         {# {{ dump(borrow.returned) }} #}
-                                        {{ borrow.id }} </br>
+                                        {# {{ borrow.id }} </br> #}
+                                        <a href="{{ path('borrowOne.index', {id: borrow.id}) }}">{{ borrow.id }}</a></br>
                                     {% endfor %}
                                 </td>
 
