@@ -149,7 +149,7 @@ class AppFixtures extends Fixture
             $copy = new Copy();
             $copy->setReference($faker->bothify('??###???'));
             $copy->setBook($books[mt_rand(0, 149)]);
-            $copy->setNumberOfCopies(mt_rand(0, 5));
+            $copy->setNumberOfCopies(mt_rand(1, 5));
 
             $copies[] = $copy;
 

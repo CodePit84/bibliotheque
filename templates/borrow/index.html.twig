@@ -34,6 +34,7 @@
                             <th>Abonné</th>
                             <th>Exemplaire</th>
                             <th>Statut</th>
+                            <th>Modifié</th>
                             <th>Retour</th>
                             {# <th>Supprimer</th> #}
                         </tr>
@@ -65,11 +66,13 @@
                                 {# <td>{{ copy.book }}</td> #}
                                 {# <td>{{ copy.borrows }}</td> #}
                                 <td>
-                                    {# <a href="{{ path('borrow.edit', {id: borrow.id}) }}" class="btn btn-info btn-sm">Modifier</a> #}
+                                    <a href="{{ path('borrow.edit', {id: borrow.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                </td>
+                                <td>
                                     {% if borrow.returned %}
                                         {{ borrow.borrowingEndDate|date("d/m/Y") }}
                                     {% else %}
-                                        <a href="{{ path('borrow.return', {id: borrow.id}) }}" class="btn btn-info btn-sm" onclick="return confirm('Voulez-vous réellement confirmé le retour ?')">Enregister le retour</a>
+                                        <a href="{{ path('borrow.return', {id: borrow.id}) }}" class="btn btn-warning btn-sm" onclick="return confirm('Voulez-vous réellement confirmé le retour ?')">Enregister le retour</a>
                                     {% endif %}
                                 </td>
                                 {# <td>
