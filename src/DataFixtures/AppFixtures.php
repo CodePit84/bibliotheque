@@ -170,7 +170,41 @@ class AppFixtures extends Fixture
             $manager->persist($borrow);
         }
 
+        // Admin
+        $admin = new User();
+        $admin->setEmail('admin@admin.fr');
+        $admin->setLastName('Caillat');
+        $admin->setFirstName('Peter');
+        $admin->setPassword(
+            $this->passwordEncoder->hashPassword($admin, 'secret')
+        );
+        $admin->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
 
+        $manager->persist($admin);
+
+        
+        $admin2 = new User();
+        $admin2->setEmail('admin2@admin.fr');
+        $admin2->setLastName('Bibliothécaire');
+        $admin2->setFirstName('Profil');
+        $admin2->setPassword(
+            $this->passwordEncoder->hashPassword($admin2, 'secret')
+        );
+        $admin2->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+
+        $manager->persist($admin2);
+
+        // User
+
+        for($usr = 1; $usr <= 5; $usr++){
+            $user = new User();
+            $user->setEmail($this->faker->email);
+            $user->setRoles(['ROLE_USER']);
+            $user->setLastName($this->faker->lastName);
+            $user->setFirstName($this->faker->firstName);
+            $user->setPassword(
+                $this->passwordEncoder->hashPassword($user, 'secret')
+            );
 
         // Ajout d'un Pays d'origine à Author
             // for ($k=0; $k < count($author); $k++) {
