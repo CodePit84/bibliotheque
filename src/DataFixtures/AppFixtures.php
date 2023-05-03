@@ -4,8 +4,11 @@ namespace App\DataFixtures;
 
 use Faker;
 use DateInterval;
+use Faker\Factory;
 use App\Entity\Book;
 use App\Entity\Copy;
+use App\Entity\User;
+use Faker\Generator;
 use App\Entity\Author;
 use App\Entity\Borrow;
 use App\Entity\Gender;
@@ -13,9 +16,17 @@ use App\Entity\Country;
 use App\Entity\RegisteredUser;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private Generator $faker;
+
+    public function __construct(private UserPasswordHasherInterface $passwordEncoder)
+    {
+        $this->faker = Factory::create('fr_FR');
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -182,7 +193,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
 
-        
+
         $admin2 = new User();
         $admin2->setEmail('admin2@admin.fr');
         $admin2->setLastName('Bibliothécaire');
@@ -205,6 +216,9 @@ class AppFixtures extends Fixture
             $user->setPassword(
                 $this->passwordEncoder->hashPassword($user, 'secret')
             );
+
+            $manager->persist($user);
+        }
 
         // Ajout d'un Pays d'origine à Author
             // for ($k=0; $k < count($author); $k++) {
