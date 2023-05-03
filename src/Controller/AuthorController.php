@@ -11,6 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AuthorController extends AbstractController
@@ -54,6 +55,7 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/author/addAuthor/', name: 'author.add')]
+    #[IsGranted('ROLE_ADMIN')]
     public function addAuthor(Request $request, EntityManagerInterface $entityManager): Response
     {
         $author = new Author();
@@ -81,6 +83,7 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/author/edit/{id}', name: 'author.edit')]
+    #[IsGranted('ROLE_ADMIN')]
     public function editAuthor(Author $author, Request $request, EntityManagerInterface $entityManager): Response
     {   
         $form = $this->createForm(AuthorFormType::class, $author);
@@ -103,6 +106,7 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/author/delete/{id}', name: 'author.delete')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Author $author, EntityManagerInterface $entityManager):Response
     {
         $entityManager->remove($author);

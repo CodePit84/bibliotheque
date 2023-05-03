@@ -95,7 +95,7 @@ class AppFixtures extends Fixture
         // Les Auteurs
         $authors= [];
 
-        for ($i=1; $i <=25 ; $i++) { 
+        for ($i=1; $i <=350 ; $i++) { 
             $author = new Author();
             $author->setlastName($faker->lastName());
             $author->setfirstName($faker->firstName());
@@ -112,7 +112,7 @@ class AppFixtures extends Fixture
         // Les Livres
         $books= [];
 
-        for ($i=1; $i <=150 ; $i++) { 
+        for ($i=1; $i <=1010 ; $i++) { 
             $book = new Book();
             // $book->setTitle($faker->sentence($nbWords = 4, $variableNbWords = true));
             $book->setTitle($faker->words(4, true));
@@ -129,7 +129,7 @@ class AppFixtures extends Fixture
         // Les Abonnés
         $registeredUsers = [];
 
-        for ($i=1; $i <=50 ; $i++) { 
+        for ($i=1; $i <=250 ; $i++) { 
             $registeredUser = new RegisteredUser();
             // $book->setTitle($faker->sentence($nbWords = 4, $variableNbWords = true));
             $registeredUser->setLastName($faker->lastName());
@@ -156,10 +156,10 @@ class AppFixtures extends Fixture
         // Les Exemplaires
         $copies = [];
 
-        for ($i=1; $i <=100 ; $i++) { 
+        for ($i=1; $i <=500 ; $i++) { 
             $copy = new Copy();
             $copy->setReference($faker->bothify('??###???'));
-            $copy->setBook($books[mt_rand(0, 149)]);
+            $copy->setBook($books[mt_rand(0, 1010)]);
             $copy->setNumberOfCopies(mt_rand(1, 5));
 
             $copies[] = $copy;
@@ -169,7 +169,7 @@ class AppFixtures extends Fixture
 
         // Les Emprunts
 
-        for ($i=1; $i <=100 ; $i++) { 
+        for ($i=1; $i <=500 ; $i++) { 
             $borrow = new Borrow();
             $borrow->setBorrowingPeriod(30);
             $borrow->setRegisteredUser($registeredUsers[mt_rand(0, 49)]);

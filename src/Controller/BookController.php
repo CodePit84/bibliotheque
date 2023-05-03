@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class BookController extends AbstractController
 {
@@ -51,6 +52,7 @@ class BookController extends AbstractController
     }
 
     #[Route('/book/addBook/', name: 'book.addBook')]
+    #[IsGranted('ROLE_ADMIN')]
     public function addBook(Request $request, EntityManagerInterface $entityManager): Response
     {
         $book = new Book();
@@ -78,6 +80,7 @@ class BookController extends AbstractController
     }
 
     #[Route('/book/edit/{id}', name: 'book.edit')]
+    #[IsGranted('ROLE_ADMIN')]
     public function editBook(Book $book, Request $request, EntityManagerInterface $entityManager): Response
     {   
         $form = $this->createForm(BookFormType::class, $book);
@@ -100,6 +103,7 @@ class BookController extends AbstractController
     }
 
     #[Route('/book/delete/{id}', name: 'book.delete')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Book $book, EntityManagerInterface $entityManager):Response
     {
         $entityManager->remove($book);
