@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les livres{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {# {{ form(form) }} #}
+
+        <div class="row">
+            {# <main class="col-9 border border-light bg-white p-2"> #}
+            <main class="border border-light bg-white p-2">
+                {# getTotalItemCount propre à knp_paginator #}
+                {# <h3>Mouvements de {{ app.user.nickname }}</h3>  #}
+                <div class="ml-auto p-2">
+                    {# <div>
+                        Nb de livres total : {{ books.getTotalItemCount }}
+                    </div> #}
+                    <div>
+                        {{ form_start(form) }}
+                        <div class="d-flex">
+                            {{ form_row(form.words) }}
+                            {{ form_row(form.Rechercher) }}
+                        </div>
+                        {{ form_end(form) }}
+                        {# {{ form(form) }} #}
+                    </div>
+                </div>
+
+                <a href="{{ path('book.addBook') }}" class="btn btn-outline-primary mx-2">Ajouter un livre</a>
+
+                    {# {{ dump(app.user) }} #}
+
+                {# {{ dump(books) }} #}
+
+                <table class="table table-hover mt-3">
+                    <thead class="table-primary">
+                        <tr>
+                            {# <th>ID</th> #}
+                            <th>Nom</th>
+                            <th>Auteur</th>
+                            <th>Genre</th>
+                            <th>Nb ex.</br>total</th>
+                            <th>Nb ex.</br>restant</th>
+                            <th>Ref. </br> exemplaire</th>
+                            <th>Ajouter un</br>exemplaire</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+
+                            <tr class="table-info">
+                                {# {% if movement.movement<0 %}
+                                    <td class="text-danger"><strong>{{ movement.movement|number_format(2) }}<strong></td>
+                                {% else %}
+                                    <td class="text-success"><strong>+{{ movement.movement|number_format(2) }}<strong></td>
+                                
+                                {% endif %} #}
+                                {# {{ dump(book) }} #}
+                                <td>{{ book.title }}</td>
+                                {# <td>{{ book.author }}</td> #}
+                                {# <td>{{ dump(book.author) }}</td> #}
+                                <td>{% for author in book.author %}
+                                        {# {{ dump(author) }} #}
+                                        {{ author.lastName }} {{ author.firstName }} </br>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ book.gender }}</td>
+                                <td>{% for copie in book.copies %}
+                                        {{ copie.numberOfCopies }} </br>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                {% for copie in book.copies %}
+                                    {% set i = 0 %}
+                                    {% if copie.borrows is empty %}
+                                        {{ copie.numberOfCopies }}</br>
+                                    {% else %}
+                                        {% for borrow in copie.borrows %}
+                                            {% if not borrow.returned %}
+                                                {% set i = i + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ copie.numberOfCopies - i }}</br>
+                                    {% endif %}
+                                {% endfor %}
+                                </td>
+                                {# <td>{{ dump(book.copies) }}</td> #}
+                                <td>{% for copie in book.copies %}
+                                        {# {{ dump(copie) }} #}
+                                        {# {{ copie.reference }} </br> #}
+                                        {# <a href="{{ path('copyOne.index', {id: copie.id}) }}" class="btn btn-warning btn-sm">{{ copie.reference }}</a></br>    #}
+                                        <a href="{{ path('copyOne.index', {id: copie.id}) }}">{{ copie.reference }}</a></br>   
+                                    {% endfor %}
+                                </td>
+                                <td><a href="{{ path('copy.addCopyFromBook', {id: book.id}) }}" class="btn btn-success btn-sm">+</a></td>
+                                <td>
+                                    <a href="{{ path('book.edit', {id: book.id}) }}" class="btn btn-info btn-sm">Modifier</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('book.delete', {id: book.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer ce livre ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {# <div class="navigation d-flex justify-content-center">
+                    {{ knp_pagination_render(books) }}
+                </div> #}
+            </main>
+        </div>
+    </div>
+{% endblock %}

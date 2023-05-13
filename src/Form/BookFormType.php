@@ -40,6 +40,9 @@ class BookFormType extends AbstractType
             )
             // ->add('author')
             ->add('author', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2'   
+                ],
                 'class' => Author::class,
                 'multiple'=>'true',
             'query_builder' => function (AuthorRepository $r) {
@@ -62,14 +65,25 @@ class BookFormType extends AbstractType
             ],
             )
             // ->add('gender')
+
+            // ->add('gender', EntityType::class, [
+            //     'class' => Gender::class,
+            // 'query_builder' => function (GenderRepository $rr) {
+            //     return $rr->createQueryBuilder('g')
+            //         ->orderBy('g.name', 'ASC');
+            // },
+            // ])
+
             ->add('gender', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2'   
+                ],
                 'class' => Gender::class,
             'query_builder' => function (GenderRepository $rr) {
                 return $rr->createQueryBuilder('g')
                     ->orderBy('g.name', 'ASC');
             },
             ])
-
         ;
     }
 

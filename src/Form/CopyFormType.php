@@ -22,6 +22,9 @@ class CopyFormType extends AbstractType
             ])
             // ->add('book')
             ->add('book', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2 form-select'   
+                ],
                 'class' => Book::class,
             'query_builder' => function (BookRepository $r) {
                 // Pour avoir les livres triés par ordre Alphabétique

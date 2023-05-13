@@ -40,6 +40,9 @@ class AuthorFormType extends AbstractType
             )
             // ->add('nativeCountry')
             ->add('nativeCountry', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2 form-select'   
+                ],
                 'class' => Country::class,
             'query_builder' => function (CountryRepository $r) {
                 // Pour avoir les pays triés par ordre Alphabétique

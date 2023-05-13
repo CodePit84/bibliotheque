@@ -2,19 +2,21 @@
 
 namespace App\Form;
 
+use DateTime;
+use App\Entity\Copy;
 use App\Entity\Borrow;
 use App\Entity\RegisteredUser;
+use App\Repository\CopyRepository;
 use Symfony\Component\Form\AbstractType;
 use App\Repository\RegisteredUserRepository;
-use DateTime;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Validator\Constraints\Date;
 
 class BorrowFormType extends AbstractType
 {
@@ -36,6 +38,9 @@ class BorrowFormType extends AbstractType
             ])
             // ->add('registeredUser')
             ->add('registeredUser', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2 form-select'   
+                ],
                 'class' => RegisteredUser::class,
             'query_builder' => function (RegisteredUserRepository $r) {
                 
@@ -49,7 +54,17 @@ class BorrowFormType extends AbstractType
                     // ->setParameter('user_id', $this->token->getToken()->getUser()->getId());
             },
             ])
-            ->add('copy')
+            // ->add('copy')
+            ->add('copy', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2'   
+                ],
+                'class' => Copy::class,
+            'query_builder' => function (CopyRepository $r) {
+                return $r->createQueryBuilder('i')
+                    ->orderBy('i.reference', 'ASC');
+            },
+            ])
         ;
     }
 

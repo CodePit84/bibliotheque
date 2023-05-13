@@ -50,6 +50,7 @@ class BookRepository extends ServiceEntityRepository
             $query->join('b.author', 'a');
             $query->where('MATCH_AGAINST(b.title, b.summary) AGAINST (:words boolean)>0')
                 ->orWhere('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
+                // ->andWhere('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
             // $query->where('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
                 ->setParameter('words',  '*' . $words . '*' );
             // dd($query);

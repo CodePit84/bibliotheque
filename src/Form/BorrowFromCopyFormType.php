@@ -32,6 +32,9 @@ class BorrowFromCopyFormType extends AbstractType
             ])
             // ->add('registeredUser')
             ->add('registeredUser', EntityType::class, [
+                'attr' => [
+                    'class' => 'select2 form-select'   
+                ],
                 'class' => RegisteredUser::class,
             'query_builder' => function (RegisteredUserRepository $r) {
                 

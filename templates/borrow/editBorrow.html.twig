@@ -29,3 +29,14 @@
     </div>
 </section>
 {% endblock %}
+
+{# Block select2 pour modifier mes formulaires de select #}
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2( {
+            theme: 'bootstrap-5'
+            } );
+        });
+    </script>
+{% endblock %}

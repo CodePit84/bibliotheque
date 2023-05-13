@@ -18,7 +18,7 @@
 
                     {{ form_row(bookForm.title) }}
                     {{ form_row(bookForm.author, { 'label': 'Auteur(s)' }) }}
-                    <small><em>Appuyer sur la Ctrl pour ajouter plusieurs auteurs</em></small>
+                    {# <small><em>Appuyer sur la Ctrl pour ajouter plusieurs auteurs</em></small> #}
                     {{ form_row(bookForm.releaseDate) }}
                     {{ form_row(bookForm.summary) }}
                     {{ form_row(bookForm.gender, { 'label': 'Genre' }) }}
@@ -30,4 +30,15 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{# Block select2 pour modifier mes formulaires de select #}
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2( {
+            theme: 'bootstrap-5'
+            } );
+        });
+    </script>
 {% endblock %}

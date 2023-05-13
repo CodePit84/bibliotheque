@@ -35,12 +35,17 @@ class BookController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             // On recherche les livres correspondants aux mots clés
-            // $books = $bookRepository->search($search->get('words')->getData());
-            $books = $paginator->paginate(
-                $bookRepository->search($search->get('words')->getData()),
-                $request->query->getInt('page', 1), /*page number*/
-                10 /*limit per page*/
-            );
+            $books = $bookRepository->search($search->get('words')->getData());
+            // $books = $paginator->paginate(
+            //     $bookRepository->search($search->get('words')->getData()),
+            //     $request->query->getInt('page', 1), /*page number*/
+            //     10 /*limit per page*/
+            // );
+        
+            return $this->render('book/indexSearch.html.twig', [
+                'books' => $books,
+                'form' => $form->createView()
+            ]);
         }
         
         
