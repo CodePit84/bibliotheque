@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats recherche de livres{% endblock %}
+
+{% block body %}
+    {# {{ dump(word) }} #}
+    {{ dump(data.items) }}
+    <div class="album py-5" id="livre">
+		<div class="container">
+            <h1 class="mb-5">Les livres existants contenants "{{ word }}"</h1>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				{% for item in data.items %}
+                    {# {{ dump(item.volumeInfo) }} #}
+					<div class="col">
+						<div class="card shadow-lg h-100 m-2">
+							<div class="card-body">
+								<h5>{{ item.volumeInfo.title }}</h5>
+                                {% if item.volumeInfo.authors is defined %}
+                                    {% for author in item.volumeInfo.authors %}
+                                        <p>{{ author }}</p>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if item.volumeInfo.publishedDate is defined %}
+                                        <p>{{ item.volumeInfo.publishedDate }}</p>
+                                {% endif %}
+
+                                {% if item.volumeInfo.subtitle is defined %}
+                                        <p>{{ item.volumeInfo.subtitle }}</p>
+                                {% endif %}
+
+                                {% if item.volumeInfo.description is defined %}
+                                        <p>{{ item.volumeInfo.description }}</p>
+                                {% endif %}
+
+                                {% if item.volumeInfo.categories is defined %}
+                                    {% for category in item.volumeInfo.categories %}
+                                        <p>{{ category }}</p>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if item.volumeInfo.imageLinks is defined %}
+                                    <img src="{{ item.volumeInfo.imageLinks.smallThumbnail }}" alt="miniature"/>
+                                {% endif %}
+                                <a href="#" class="btn btn-primary mt-3">Ajouter ce livre à la Bibliothèque</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+        </div>
+    </div>
+	
+{% endblock %}

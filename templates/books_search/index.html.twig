@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de Livres sur Google Books{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        {{ form_start(bookForm) }}
+            {{ form_row(bookForm.search) }}
+            <button type="submit" class="btn btn-primary btn-lg my-3">Rechercher</button>
+        {{ form_end(bookForm) }} 
+    </div>
+</div>
+
+{% endblock %}
