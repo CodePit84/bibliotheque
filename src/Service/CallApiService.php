@@ -13,6 +13,12 @@ class CallApiService
         $this->client = $client;
     }
 
+    /**
+     * This function call Google API with a variable from search GoogleBooksController
+     * 
+     * @param string $variable
+     * @return array
+     */
     public function getBooks(string $variable): array
     {
         $response = $this->client->request(

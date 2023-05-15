@@ -47,7 +47,8 @@ class BookFormType extends AbstractType
                 'multiple'=>'true',
             'query_builder' => function (AuthorRepository $r) {
                 return $r->createQueryBuilder('i')
-                    ->orderBy('i.lastName', 'ASC');
+                    // ->orderBy('i.lastName', 'ASC');
+                    ->orderBy('i.firstName', 'ASC');
             },
             ])
             // ->add('releaseDate')

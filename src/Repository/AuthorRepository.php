@@ -54,6 +54,25 @@ class AuthorRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    
+
+    /**
+     * Pour ajouter le nom d'un auteur à partir d'aun Ajout de Livre via Google Books
+     * Fais une recherche puis retourne l'entité trouvée
+     */
+    public function addFromGoogle($words){
+        $query = $this->createQueryBuilder('a');
+        if($words != null){
+            $query->where('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
+                ->setParameter('words',  '*' . $words . '*' );
+        }
+
+        // dd($query->getQuery()->getResult());
+        // dd($query->getQuery()->getResult()[0]);
+        // return $query->getQuery()->getResult();
+        return $query->getQuery()->getResult()[0];
+    }
+
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */
