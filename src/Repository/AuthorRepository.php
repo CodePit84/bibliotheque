@@ -70,7 +70,9 @@ class AuthorRepository extends ServiceEntityRepository
         // dd($query->getQuery()->getResult());
         // dd($query->getQuery()->getResult()[0]);
         // return $query->getQuery()->getResult();
-        return $query->getQuery()->getResult()[0];
+        if ($query->getQuery()->getResult()) {
+            return $query->getQuery()->getResult()[0];
+        }
     }
 
 //    /**

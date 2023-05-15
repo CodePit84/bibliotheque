@@ -56,8 +56,18 @@ class GoogleBooksController extends AbstractController
 
         // $book->getAuthor($callApiService->getBooks($word)["items"][0]["volumeInfo"]["authors"][0]);
         
-        $authorFind = $book->getAuthor($authorRepository->addFromGoogle('emile zola'));
-        $book->addAuthor($authorRepository->addFromGoogle('emile zola'));
+        // Récupération du nom de l'auteur from GOOGLE BOOKS
+        $authorFromGoogle = $callApiService->getBooks($word)["items"][0]["volumeInfo"]["authors"][0];
+        // dd($authorFromGoogle);
+
+            // $book->addAuthor($authorRepository->addFromGoogle('emile zola'));
+        
+        // Si l'auteur figure dans l'AuthorRepository alors on ajoute l'ajoute dans le champs Auteur, sinon on laisse vide 
+        if ($authorRepository->addFromGoogle($authorFromGoogle)) {
+            $book->addAuthor($authorRepository->addFromGoogle($authorFromGoogle));
+        }
+
+
         // $book->addAuthor($authorFind, Author $author) ;
 
         // dd($authorFind);
