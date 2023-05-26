@@ -10,14 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BooksSearchController extends AbstractController
 {
-    // #[Route('/books/search', name: 'app_books_search')]
-    // public function index(): Response
-    // {
-    //     return $this->render('books_search/index.html.twig', [
-    //         'controller_name' => 'BooksSearchController',
-    //     ]);
-    // }
-
+    /**
+     * Allow us to find some books on Google API
+     *
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/search', name: 'searchGoogle')]
     public function search(Request $request): Response
     {  
@@ -32,10 +30,6 @@ class BooksSearchController extends AbstractController
             $search = $form->getData();
 
             $word = $search["search"];
-
-            // dd($word);
-
-            // dd($search);
 
             return $this->redirectToRoute('googleBooks', array('word' => $word));
         }

@@ -7,49 +7,42 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
-				{# <li class="nav-item">
-					<a class="nav-link active" href="{{ path('home.index') }}">Accueil
-						<span class="visually-hidden">(current)</span>
-					</a>
-				</li> #}
+				{# {% if app.user %} #}
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path('book.index') }}">Livres
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('copy.index') }}">Exemplaires
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('borrow.index') }}">Emprunts
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('gender.index') }}">Genre
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('author.index') }}">Auteurs
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('country.index') }}">Pays d'origine
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('registeredUser.index') }}">Abonnés
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('searchGoogle') }}">Rechercher sur Google Books
-					</a>
-				</li>
-				{# {% if app.user %}
+					{# {% if 'ROLE_ADMIN' in app.user.roles %} #}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('skill.index') }}">Listes des compétences
+						<a class="nav-link" href="{{ path('copy.index') }}">Exemplaires
 						</a>
 					</li>
-				{% endif %} #}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('borrow.index') }}">Emprunts
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('gender.index') }}">Genre
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('author.index') }}">Auteurs
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('country.index') }}">Pays d'origine
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('registeredUser.index') }}">Abonnés
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('searchGoogle') }}">Rechercher sur Google Books
+						</a>
+					</li>
+					{# {% endif %} #}
+				{# {% endif %} #}
 			</ul>
 			<div class="d-flex">
 				<ul class="navbar-nav me-auto">

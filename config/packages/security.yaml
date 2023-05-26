@@ -31,15 +31,16 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/copy, roles: ROLE_ADMIN }
         - { path: ^/borrow, roles: ROLE_ADMIN }
         - { path: ^/gender, roles: ROLE_ADMIN }
-        # - { path: ^/author, roles: ROLE_ADMIN }
+        - { path: ^/author, roles: ROLE_USER }
+        - { path: ^/book, roles: ROLE_USER }
         - { path: ^/country, roles: ROLE_ADMIN }
         - { path: ^/registered, roles: ROLE_ADMIN }
+        - { path: ^/search, roles: ROLE_ADMIN }
+        - { path: ^/googleBooks, roles: ROLE_ADMIN }
 
 when@test:
     security:

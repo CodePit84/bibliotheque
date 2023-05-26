@@ -13,7 +13,6 @@ class BooksSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('search')
             ->add('search', TextType::class, [
                 'attr' => [
                     'class' => 'form-control mt-3',

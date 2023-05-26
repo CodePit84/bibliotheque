@@ -33,7 +33,7 @@ class AuthorController extends AbstractController
         $search = $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-            // On recherche les livres correspondants aux mots clés
+            // On recherche les auteurs correspondants aux mots clés
             // $books = $bookRepository->search($search->get('words')->getData());
             $authors = $paginator->paginate(
                 $authorRepository->search($search->get('words')->getData()),
@@ -73,7 +73,6 @@ class AuthorController extends AbstractController
 
             $this->addFlash('success', 'Auteur ajouté avec succès');
 
-            // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
             return $this->redirectToRoute('author.index');
         }
         
@@ -95,7 +94,6 @@ class AuthorController extends AbstractController
 
             $this->addFlash('success', 'Auteur modifié avec succès');
 
-            // return $this->redirectToRoute('country.index', array('id' => $userId));
             return $this->redirectToRoute('author.index');
         }
         
@@ -114,7 +112,6 @@ class AuthorController extends AbstractController
 
         $this->addFlash('success', 'Auteur supprimé avec succès');
 
-        // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
         return $this->redirectToRoute('author.index');
     }
 }
