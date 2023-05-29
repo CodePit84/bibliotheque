@@ -18,20 +18,20 @@ class BorrowFromCopyFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('borrowingPeriod')
             ->add('borrowingPeriod', IntegerType::class, [
+                'label' => 'Durée d\'emprunt en jours (non modifiable)',
                 'attr' => [
                     'value' => 30,
                     'disabled' => "",
                 ],
             ])
             ->add('borrowingDate', DateType::class, [
-                'label' => 'Date de naisance',
+                'label' => 'Date de l\'emprunt',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            // ->add('registeredUser')
             ->add('registeredUser', EntityType::class, [
+                'label' => 'Abonné (abonnement actif)',
                 'attr' => [
                     'class' => 'select2 form-select'   
                 ],

@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use DateTime;
 use App\Entity\Copy;
 use App\Entity\Borrow;
 use App\Entity\RegisteredUser;
@@ -14,9 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BorrowFormType extends AbstractType
 {
@@ -26,18 +23,19 @@ class BorrowFormType extends AbstractType
         
         $builder
             ->add('borrowingPeriod', IntegerType::class, [
+                'label' => 'Durée d\'emprunt en jours (non modifiable)',
                 'attr' => [
                     'value' => 30,
                     'disabled' => "",
                 ],
             ])
             ->add('borrowingDate', DateType::class, [
-                'label' => 'Date de naisance',
+                'label' => 'Date de l\'emprunt',
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-            // ->add('registeredUser')
             ->add('registeredUser', EntityType::class, [
+                'label' => 'Abonné (abonnement actif)',
                 'attr' => [
                     'class' => 'select2 form-select'   
                 ],
@@ -50,12 +48,10 @@ class BorrowFormType extends AbstractType
                     // ->where("i.subscriptionEndDate>='2024-04-04'");
                     ->where("i.subscriptionEndDate>=CURRENT_TIMESTAMP()")
                     ->orderBy('i.lastName', 'ASC');
-                    // ->setParameter('id', $this->token->getToken()->getUser());
-                    // ->setParameter('user_id', $this->token->getToken()->getUser()->getId());
             },
             ])
-            // ->add('copy')
             ->add('copy', EntityType::class, [
+                'label' => 'Réf exemplaire',
                 'attr' => [
                     'class' => 'select2'   
                 ],

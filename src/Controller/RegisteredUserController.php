@@ -162,7 +162,6 @@ class RegisteredUserController extends AbstractController
 
         $this->addFlash('success', 'Auteur supprimé avec succès');
 
-        // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
         return $this->redirectToRoute('registeredUser.index');
     }
 }

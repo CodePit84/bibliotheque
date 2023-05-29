@@ -9,6 +9,10 @@
 
         <!-- Appel de la Feuille de style minifiée De La librairie Bootswatch -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/zephyr/bootstrap.min.css" integrity="sha512-dcTg+pv6j02FTyko5ua8nsnARs/l4u43vmnbeVgkFWB5wdLgfUq4CEotFWOlTE4XK7FfVriWj7BrpqET/a+SJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/flatly/bootstrap.min.css" integrity="sha512-q+Sm01IL0q3keoeZkh7cHh6CcUGU0LVwFIf9Il4utcw0oC2MH9mpATEyvuh6dbzDiV8Pw4CXlsT7O1zXFc0LwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> #}
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/sandstone/bootstrap.min.css" integrity="sha512-htdEY26zvWZsYx2eXj2dzqQiivv7tzUf0pikw66WHEcNkFNYsHEQqIkJYsSWgS7a8ST4q5Wqrjk5RZS4MEX90g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> #}
+        {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/spacelab/bootstrap.min.css" integrity="sha512-kb6aHe8Fchic05HVLuEio/LWsmwtNRndUxZ5AqK4IyMG817Dhff2BxuKJCRPWzQ4daCxN5TagQ5s8Hpo9YJgbQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> #}
+
         <!-- Appel de la Feuille de style minifiée De Select 2 -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         {# <link href="{{ asset('node_modules/select2/dist/css/select2.min.css' }}"  rel="stylesheet" /> #}
@@ -49,7 +53,9 @@
             {% include "partials/_header.html.twig" %}
         {% endblock %}
 
+        {% block flash %}
         {% include "partials/_flash.html.twig" %}
+        {% endblock %}
 
         {% block body %}
         {% endblock %}

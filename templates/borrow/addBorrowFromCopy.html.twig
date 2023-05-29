@@ -7,21 +7,10 @@
     <div class="row mt-4">
         <div class="col">
             <h1 class="mb-3">Ajout d'un emprunt</h1>
-
-            {# {{ dump(app) }} #}
-
             {{ form_start(borrowForm) }}
-
-                {# {{ dump(bookForm) }} #}
-
-                {# <fieldset class="mb-3"> #}
-
-                    {{ form_row(borrowForm.borrowingPeriod, { 'label': 'Période d\'emprunt (en jours)' }) }}
-                    {{ form_row(borrowForm.borrowingDate, { 'label': 'Date d\'emprunt' }) }}
-                    {{ form_row(borrowForm.registeredUser, { 'label': 'Abonné' }) }}
-                    
-
-                {# </fieldset> #}
+                {{ form_row(borrowForm.borrowingPeriod) }}
+                {{ form_row(borrowForm.borrowingDate) }}
+                {{ form_row(borrowForm.registeredUser) }}
                 <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
             {{ form_end(borrowForm) }}        
         </div>

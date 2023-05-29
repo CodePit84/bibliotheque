@@ -2,74 +2,67 @@
 
 {% block title %}La Bibliothèque - Accueil{% endblock %}
 
+{% block header %}
+  <div class="fixed-top">
+    {% include "partials/_header_home.html.twig" %}
+  </div>
+{% endblock %}
+
 {% block body %}
+  <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+  
+{# <div class="container mt-4"> #}
 
-<div class="container mt-4">
-
+  {% block flash %}
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success mt-4">
+        <div class="fixed-bottom alert alert-success mt-4">
             {{ message }}
         </div>
     {% endfor %}
 
     {% for message in app.flashes('warning') %}
-        <div class="alert alert-warning mt-4">
+        <div class="fixed-bottom alert alert-warning mt-4">
             {{ message }}
         </div>
     {% endfor %}
+  {% endblock %}
 
-    <div class="jumbotron">
-        <h1 class="display-4">Bienvenue sur La Bibliothèque !</h1>
-        <p class="lead">Gestion des livres et des emprunts.</p>
+  <!-- Hero Start -->
+  <section class="hero">
 
-        <div class="d-flex justify-content-center">
-            <section class="w-50">
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item">
-                            <img src="images/image3.jpg" class="d-block w-100" alt="photo homme cherche livre">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="images/image4.jpg" class="d-block w-100" alt="photo salle d'étude">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="images/image5.jpg" class="d-block w-100" alt="photo homme devant bibliothèque">
-                        </div>
-                        <div class="carousel-item active">
-                            <img src="images/image9.jpg" class="d-block w-100" alt="photo salle bibliothèque">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                </section>
+    <div class="hero__overlay"></div>
+
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" loading="lazy" class="hero__video">
+      <source src="images/pexels-books.mp4" type="video/mp4">
+    </video>
+      
+    <div class="hero__content h-100 container-custom position-relative">
+      <div class="d-flex h-100 align-items-center hero__content-width">
+        <div class="text-white">
+          <h1 class="hero__heading fw-bold mb-4">Bienvenue sur la Bibliothèque.</h1>
+          <p class="lead mb-4">Gestion des livres et des emprunts.</p>
+          {% if app.user %}
+          <a href="{{ path('app_logout') }}" class="mt-2 btn btn-lg btn-outline-light" role="button">Déconnexion</a>
+          {% else %}
+          <a href="{{ path('app_login') }}" class="mt-2 btn btn-lg btn-outline-light" role="button">Connexion</a>
+          <a href="{{ path('app_registration') }}" class="mt-2 btn btn-lg btn-outline-light" role="button">Inscription</a>
+          {% endif %}
         </div>
-    
-        {% if app.user %}
-        <hr class="my-4">
-        <p>Accédez aux paramètres de votre compte.</p>
-        {# <a class="btn btn-primary btn-lg" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a> #}
-        {# <a class="btn btn-success btn-lg" href="{{ path('cv.index', {id : app.user.id}) }}">Mon CV</a> #}
-        <a class="btn btn-success btn-lg" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
-        {% else %}
-        <hr class="my-4">
-        <p>Pour commencer, rendez-vous sur la page d'inscription ou connectez-vous.</p>
-        <a class="btn btn-primary btn-lg" href="{{ path('app_registration') }}" role="button">Inscription</a>
-        <a class="btn btn-success btn-lg" href="{{ path('app_login') }}" role="button">Connexion</a>
-        {% endif %}
+      </div>
     </div>
+    <a href="https://github.com/CodePit84" class="hero__scroll-btn">
+      CAILLAT Peter © {{ 'now'|date ('Y') }}<i class="bi bi-arrow-down-short"></i>
+    </a>
+
+  </section>
+  <!-- Hero End -->
 </div>
 
 
 
 {# <div class="d-flex"> #}
-<div class="justify-content-center fixed-bottom row align-items-end">
+
+{# <div class="justify-content-center fixed-bottom row align-items-end">
 <div class="sticky-md-bottom">
     <footer class="text-center text-lg-start bg-light text-muted mt-4">
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -78,5 +71,5 @@
         </div>
     </footer>
 </div>
-</div>
+</div> #}
 {% endblock %}

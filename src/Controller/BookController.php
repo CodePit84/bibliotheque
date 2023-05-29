@@ -97,7 +97,6 @@ class BookController extends AbstractController
 
             $this->addFlash('success', 'Livre modifié avec succès');
 
-            // return $this->redirectToRoute('country.index', array('id' => $userId));
             return $this->redirectToRoute('book.index');
         }
         
@@ -116,7 +115,6 @@ class BookController extends AbstractController
 
         $this->addFlash('success', 'Livre supprimé avec succès');
 
-        // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
         return $this->redirectToRoute('book.index');
     }
 }

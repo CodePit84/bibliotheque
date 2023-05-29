@@ -6,10 +6,13 @@
 
 <div class="container">
     <div class="row">
+        <div class="border border-light bg-white p-2 mt-3">
+        <h3>Rechercher un livre sur Google Books</h3>
         {{ form_start(bookForm) }}
             {{ form_row(bookForm.search) }}
             <button type="submit" class="btn btn-primary btn-lg my-3">Rechercher</button>
         {{ form_end(bookForm) }} 
+        </div>
     </div>
 </div>
 

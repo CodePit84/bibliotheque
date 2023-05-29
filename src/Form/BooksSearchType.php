@@ -19,7 +19,7 @@ class BooksSearchType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '255',   
                 ],
-                'label' => 'Rechercher un livre sur Google Books (entrer 1 ou plusieurs mots clés) :',
+                'label' => 'Entrer un ou plusieurs mots clés :',
                 'label_attr' => [
                     'class' => 'form-label mt-3'
                 ],
