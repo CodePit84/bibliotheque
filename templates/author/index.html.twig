@@ -46,8 +46,10 @@
                             <th>Date de naissance</th>
                             <th>Pays d'origine</th>
                             <th>Biographie</th>
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
                             <th>Modifier</th>
                             <th>Supprimer</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +68,14 @@
                                 <td>{{ author.dateOfBirth|date("d/m/Y") }}</td>
                                 <td>{{ author.nativeCountry }}</td>
                                 <td>{{ author.biography }}</td>
-                                {# <td>{{ movement.date.format('d/m/Y') }}</td> #}
+                                {% if 'ROLE_ADMIN' in app.user.roles %}
                                 <td>
                                     <a href="{{ path('author.edit', {id: author.id}) }}" class="btn btn-info btn-sm">Modifier</a>
                                 </td>
                                 <td>
                                     <a href="{{ path('author.delete', {id: author.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Voulez-vous réellement supprimer cet auteur ?')">Supprimer</a>
                                 </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -7,12 +7,16 @@
 
 		<div class="collapse navbar-collapse" id="navbarColor01">
 			<ul class="navbar-nav me-auto">
-				{# {% if app.user %} #}
+				{% if app.user %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path('book.index') }}">Livres
 					</a>
 				</li>
-					{# {% if 'ROLE_ADMIN' in app.user.roles %} #}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('author.index') }}">Auteurs
+					</a>
+				</li>
+					{% if 'ROLE_ADMIN' in app.user.roles %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('copy.index') }}">Exemplaires
 						</a>
@@ -23,10 +27,6 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('gender.index') }}">Genre
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('author.index') }}">Auteurs
 						</a>
 					</li>
 					<li class="nav-item">
@@ -41,8 +41,8 @@
 						<a class="nav-link" href="{{ path('searchGoogle') }}">Rechercher sur Google Books
 						</a>
 					</li>
-					{# {% endif %} #}
-				{# {% endif %} #}
+					{% endif %}
+				{% endif %}
 			</ul>
 			<div class="d-flex">
 				<ul class="navbar-nav me-auto">
@@ -50,8 +50,8 @@
 						<li class="nav-item dropdown" style="margin-right: 8rem;">
 							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.lastName }} {{ app.user.firstName }}</a>
 							<div class="dropdown-menu">
-								{# <a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a> #}
-								{# <a class="dropdown-item" href="{{ path('user.edit.password', {id : app.user.id}) }}">Modifier mon mot de passe</a> #}
+								<a class="dropdown-item" href="{{ path('edit.user', {id : app.user.id}) }}">Modifier mes informations</a>
+								<a class="dropdown-item" href="{{ path('edit.password.user', {id : app.user.id}) }}">Modifier mon mot de passe</a>
 								<div class="dropdown-divider"></div>
 								{% if 'ROLE_ADMIN' in app.user.roles %}
 									<a class="dropdown-item" href="{{ path('admin') }}">Administration</a>

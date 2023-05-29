@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du profil utilisateur{% endblock %}
+
+{% block body %}
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Modification du profil utilisateur</h1>
+
+            {{ form_start(editUserForm) }}
+                <legend>Mon identité</legend>
+                {{ form_row(editUserForm.lastname) }}
+                {{ form_row(editUserForm.firstname) }}
+                {{ form_row(editUserForm.email) }}
+                <button type="submit" class="btn btn-primary btn-lg my-3">Sauvegarder</button>
+                <a href="{{ path('edit.password.user', {id: app.user.id}) }}" class="btn btn-warning">Modifier le mot de passe</a>           
+            {{ form_end(editUserForm) }} 
+        </div>
+    </div>
+</section>
+{% endblock %}
