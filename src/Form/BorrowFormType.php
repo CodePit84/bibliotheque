@@ -23,10 +23,9 @@ class BorrowFormType extends AbstractType
         
         $builder
             ->add('borrowingPeriod', IntegerType::class, [
-                'label' => 'Durée d\'emprunt en jours (non modifiable)',
+                'label' => 'Durée d\'emprunt en jours',
                 'attr' => [
                     'value' => 30,
-                    'disabled' => "",
                 ],
             ])
             ->add('borrowingDate', DateType::class, [

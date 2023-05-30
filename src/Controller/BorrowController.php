@@ -74,11 +74,12 @@ class BorrowController extends AbstractController
             $subscriptionEndDateOfRegisteredUserSelected = $borrow->getRegisteredUser()->getsubscriptionEndDate() ;
             
             if ($subscriptionEndDateOfRegisteredUserSelected > $todaysDate) {
-            
+
                 $entityManager->persist($borrow);
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Emprunt ajouté avec succès');
+                return $this->redirectToRoute('borrow.index');
             }
             
             $this->addFlash('danger', 'La période de l\'abonnement de l\'abonné est dépassée');
@@ -114,8 +115,6 @@ class BorrowController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Emprunt ajouté avec succès');
-
-            // return $this->redirectToRoute('app_movement_user', array('id' => $userId));
             return $this->redirectToRoute('borrow.index');
         }
         
