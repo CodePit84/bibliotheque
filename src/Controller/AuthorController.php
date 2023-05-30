@@ -20,7 +20,6 @@ class AuthorController extends AbstractController
     public function index(AuthorRepository $authorRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $authors = $paginator->paginate(
-            // $countryRepository->findAll(),
             // Pour un ordre alphabétique :
             $authorRepository->findBy(array(), array('lastName' => 'ASC')),
             $request->query->getInt('page', 1), /*page number*/
@@ -34,7 +33,6 @@ class AuthorController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()){
             // On recherche les auteurs correspondants aux mots clés
-            // $books = $bookRepository->search($search->get('words')->getData());
             $authors = $paginator->paginate(
                 $authorRepository->search($search->get('words')->getData()),
                 $request->query->getInt('page', 1), /*page number*/
@@ -42,16 +40,10 @@ class AuthorController extends AbstractController
             );
         }
         
-        
-        
         return $this->render('author/index.html.twig', [
             'authors' => $authors,
             'form' => $form->createView()
         ]);
-
-        // return $this->render('author/index.html.twig', [
-        //     'authors' => $authors,
-        // ]);
     }
 
     #[Route('/author/addAuthor/', name: 'author.add')]

@@ -66,10 +66,6 @@ class AuthorRepository extends ServiceEntityRepository
             $query->where('MATCH_AGAINST(a.lastName, a.firstName) AGAINST (:words boolean)>0')
                 ->setParameter('words',  '*' . $words . '*' );
         }
-
-        // dd($query->getQuery()->getResult());
-        // dd($query->getQuery()->getResult()[0]);
-        // return $query->getQuery()->getResult();
         if ($query->getQuery()->getResult()) {
             return $query->getQuery()->getResult()[0];
         }

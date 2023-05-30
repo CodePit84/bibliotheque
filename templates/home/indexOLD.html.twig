@@ -54,8 +54,6 @@
         {% if app.user %}
         <hr class="my-4">
         <p>Accédez aux paramètres de votre compte.</p>
-        {# <a class="btn btn-primary btn-lg" href="{{ path('user.edit', {id : app.user.id}) }}">Modifier mes informations</a> #}
-        {# <a class="btn btn-success btn-lg" href="{{ path('cv.index', {id : app.user.id}) }}">Mon CV</a> #}
         <a class="btn btn-success btn-lg" href="{{ path('app_logout') }}" role="button">Déconnexion</a>
         {% else %}
         <hr class="my-4">
